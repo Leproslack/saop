@@ -1,0 +1,38 @@
+<%= form_for(poll) do |f| %>
+  <% if poll.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(poll.errors.count, "error") %> prohibited this poll from being saved:</h2>
+
+      <ul>
+      <% poll.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3>Представление</h3>
+      <p>Чистота
+      <%= f.number_field(:a11, in: 1..10) %>
+      <%= f.text_area(:ac11, value: "Комментарий", rows: 3 ) %> </p>
+      <p>Громкость
+      <%= f.number_field(:a12, in: 1..10) %>
+    <%= f.text_area(:ac12, value: "Комментарий") %></p>
+      <p>Внешний вид
+      <%= f.number_field(:a13, in: 1..10) %>
+      <%= f.text_area(:ac13, value: "Комментарий") %></p>
+  <h3>Мерчендайзинг</h3>
+      <p>Выкладка товара
+      <%= f.number_field(:a21, in: 1..10) %>
+      <%= f.text_area(:ac21, value: "Комментарий") %></p>
+      <p>Ассортимент
+      <%= f.number_field(:a22, in: 1..10) %>
+      <%= f.text_area(:ac22, value: "Комментарий") %></p>
+  <h3>Знание</h3>
+      <p>Уровень знаний ассортимента и характеристик товаров
+      <%= f.number_field(:a31, in: 1..10) %>
+      <%= f.text_area(:ac31, value: "Комментарий") %></p>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
