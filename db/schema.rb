@@ -11,40 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308140919) do
-
-  create_table "answers", force: :cascade do |t|
-    t.integer  "answer_rate"
-    t.text     "answer_comment"
-    t.integer  "question_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
-
-  create_table "categories", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "poll_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "categories", ["poll_id"], name: "index_categories_on_poll_id"
-
-  create_table "polls", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "title"
-  end
-
-  create_table "questions", force: :cascade do |t|
-    t.string   "quest"
-    t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "questions", ["category_id"], name: "index_questions_on_category_id"
+ActiveRecord::Schema.define(version: 0) do
 
 end
