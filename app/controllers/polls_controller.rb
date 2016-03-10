@@ -1,13 +1,16 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
 
+
   def get_media_for_category
-    @poll.cat1 = (poll_params[:a11].to_i + poll_params[:a12].to_i + poll_params[:a13].to_i)/3
-    @poll.cat2 = (poll_params[:a21].to_i + poll_params[:a22].to_i)/2
-    @poll.cat3 =  poll_params[:a31].to_i
+    @poll.cat1 = ((poll_params[:a11].to_i + poll_params[:a12].to_i + poll_params[:a13].to_i)/3)*100/5
+    @poll.cat2 = ((poll_params[:a21].to_i + poll_params[:a22].to_i)/2)*100/5
+    @poll.cat3 =  poll_params[:a31].to_i*100/5
+    @poll.poll_rate = ((poll_params[:a11].to_i + poll_params[:a12].to_i + poll_params[:a13].to_i + poll_params[:a21].to_i + poll_params[:a22].to_i + poll_params[:a31].to_i)/6)*100/5
   end
   # GET /polls
   # GET /polls.json
+
   def index
     @polls = Poll.all
   end
@@ -78,6 +81,6 @@ class PollsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
-      params.require(:poll).permit(:a11, :a12, :a13, :a21, :a22, :a31, :ac11, :ac12,:ac13,:ac21,:ac22,:ac31)
+      params.require(:poll).permit(:name, :a11, :a12, :a13, :a21, :a22, :a31, :ac11, :ac12,:ac13,:ac21,:ac22,:ac31)
     end
 end
