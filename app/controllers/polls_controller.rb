@@ -1,6 +1,11 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
 
+  def get_media_for_category
+    @poll.cat1 = (poll_params[:a11].to_i + poll_params[:a12].to_i + poll_params[:a13].to_i)/3
+    @poll.cat2 = (poll_params[:a21].to_i + poll_params[:a22].to_i)/2
+    @poll.cat3 =  poll_params[:a31].to_i
+  end
   # GET /polls
   # GET /polls.json
   def index
@@ -25,7 +30,7 @@ class PollsController < ApplicationController
   # POST /polls.json
   def create
     @poll = Poll.new(poll_params)
-    @poll.cat1 = poll_params[:a11] + poll_params[:a12] + poll_params[:a13]
+    get_media_for_category
 
 
     respond_to do |format|
@@ -42,6 +47,8 @@ class PollsController < ApplicationController
   # PATCH/PUT /polls/1
   # PATCH/PUT /polls/1.json
   def update
+    get_media_for_category
+
     respond_to do |format|
       if @poll.update(poll_params)
         format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
