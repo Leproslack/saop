@@ -2,19 +2,19 @@
 
 <h1>Список магазинов</h1>
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>Название маазина</th>
       <th>Адрес магазина</th>
       <th>Категория магазина</th>
-      <th colspan="3"></th>
+      <th colspan="3">Действия</th>
     </tr>
   </thead>
 
   <tbody>
     <% @stores.each do |store| %>
-      <tr>
+      <tr class=<%= cycle('even', 'odd') %>>
         <td><%= store.store_name %></td>
         <td><%= store.store_adress %></td>
         <td><%= store.store_caregory %></td>
