@@ -3,10 +3,10 @@ class PollsController < ApplicationController
 
 
   def get_media_for_category
-    @poll.cat1 = ((poll_params[:a11].to_i + poll_params[:a12].to_i + poll_params[:a13].to_i)/3)*100/5
-    @poll.cat2 = ((poll_params[:a21].to_i + poll_params[:a22].to_i)/2)*100/5
-    @poll.cat3 =  poll_params[:a31].to_i*100/5
-    @poll.poll_rate = ((poll_params[:a11].to_i + poll_params[:a12].to_i + poll_params[:a13].to_i + poll_params[:a21].to_i + poll_params[:a22].to_i + poll_params[:a31].to_i)/6)*100/5
+    @poll.cat1 = ((poll_params[:a11].to_f + poll_params[:a12].to_f + poll_params[:a13].to_f)/3)*100/5
+    @poll.cat2 = ((poll_params[:a21].to_f + poll_params[:a22].to_f)/2)*100/5
+    @poll.cat3 =  poll_params[:a31].to_f*100/5
+    @poll.poll_rate = ((poll_params[:a11].to_f + poll_params[:a12].to_f + poll_params[:a13].to_f + poll_params[:a21].to_f + poll_params[:a22].to_f + poll_params[:a31].to_f)/6)*100/5
   end
   # GET /polls
   # GET /polls.json

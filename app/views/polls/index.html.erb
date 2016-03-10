@@ -13,7 +13,7 @@
   <tbody>
     <% @polls.each do |poll| %>
       <tr>
-        <td> <%= poll.name %>. Rate: <%= poll.poll_rate %>%</td>
+        <td> <%= poll.name %>. Rate: <%= poll.poll_rate.round %>%</td>
         <td><%= link_to 'Show', poll %></td>
         <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
         <td><%= link_to 'Destroy', poll, method: :delete, data: { confirm: 'Are you sure?' } %></td>

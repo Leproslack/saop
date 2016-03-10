@@ -11,27 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310130040) do
+ActiveRecord::Schema.define(version: 20160310145755) do
 
   create_table "polls", force: :cascade do |t|
-    t.integer  "cat1"
+    t.float    "cat1"
     t.integer  "a11"
     t.text     "ac11"
     t.integer  "a12"
     t.text     "ac12"
     t.integer  "a13"
     t.text     "ac13"
-    t.integer  "cat2"
+    t.float    "cat2"
     t.integer  "a21"
     t.text     "ac21"
     t.integer  "a22"
     t.text     "ac22"
-    t.integer  "cat3"
+    t.float    "cat3"
     t.integer  "a31"
     t.text     "ac31"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "poll_rate"
+    t.float    "poll_rate"
     t.string   "name"
   end
 

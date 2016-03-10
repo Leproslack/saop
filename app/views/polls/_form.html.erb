@@ -10,8 +10,10 @@
       </ul>
     </div>
   <% end %>
+          
       <%= f.label(:name, value: "Poll" + Time.now.strftime("%Y%d%m%H%M%S")) %>
       <%= f.hidden_field(:name, value: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}" ) %>
+
   <h3>Представление</h3>
       <p>Чистота
       <%= f.number_field(:a11, in: 1..5) %>
