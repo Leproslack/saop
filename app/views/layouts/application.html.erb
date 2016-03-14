@@ -11,6 +11,17 @@
 
   <body>
   <div class="container">
+    <% if current_user %>
+        <%= "Hello, #{current_user.email}" %>
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+    <% else %>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sign_in">
+          Launch demo modal
+        </button>
+        <%= link_to "Sign up", "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small' %>
+        <%= render 'shared/sign_in' %>
+        <%= render 'shared/sign_up' %>
+    <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
