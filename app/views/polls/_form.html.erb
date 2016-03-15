@@ -10,30 +10,42 @@
       </ul>
     </div>
   <% end %>
-          
+
       <%= f.label(:name, value: "Poll" + Time.now.strftime("%Y%d%m%H%M%S")) %>
       <%= f.hidden_field(:name, value: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}" ) %>
 
   <h3>Представление</h3>
-      <p>Чистота
-      <%= f.number_field(:a11, in: 1..5) %>
+      <p>
+        <%= f.label :a11, 'Чистота' %>
+      <%= f.select :a11, ((0..5).map {|i| [i,i] } ) %> <br />
+      <%= f.label :aс11, 'Кмментарий' %>
       <%= f.text_area(:ac11,  rows: 3 ) %> </p>
-      <p>Громкость
-      <%= f.number_field(:a12, in: 1..5) %>
+      <p>
+        <%= f.label :a11, 'Громкость' %>
+      <%= f.select :a12, ((0..5).map {|i| [i,i] } ) %><br />
+      <%= f.label :aс12, 'Кмментарий' %>
     <%= f.text_area(:ac12, rows: 3) %></p>
-      <p>Внешний вид
-      <%= f.number_field(:a13, in: 1..5) %>
+      <p>
+        <%= f.label :a11, 'Внешний вид' %>
+      <%= f.select :a12, ((0..5).map {|i| [i,i] } ) %><br />
+      <%= f.label :aс13, 'Кмментарий' %>
       <%= f.text_area(:ac13, rows: 3) %></p>
   <h3>Мерчендайзинг</h3>
-      <p>Выкладка товара
-      <%= f.number_field(:a21, in: 1..5) %>
+      <p>
+        <%= f.label :a11, 'Выкладка товара' %>
+      <%= f.select :a21, ((0..5).map {|i| [i,i] } ) %><br />
+      <%= f.label :aс21, 'Кмментарий' %>
       <%= f.text_area(:ac21, rows: 3) %></p>
-      <p>Ассортимент
-      <%= f.number_field(:a22, in: 1..5) %>
+      <p>
+        <%= f.label :a11, 'Ассортимент' %>
+        <%= f.select :a22, ((0..5).map {|i| [i,i] } ) %><br />
+        <%= f.label :aс22, 'Кмментарий' %>
       <%= f.text_area(:ac22, rows: 3) %></p>
   <h3>Знание</h3>
-      <p>Уровень знаний ассортимента и характеристик товаров
-      <%= f.number_field(:a31, in: 1..5) %>
+      <p>
+        <%= f.label :a11, 'Уровень знаний ассортимента и характеристик товаров' %>
+      <%= f.select :a31, ((0..5).map {|i| [i,i] } ) %><br />
+      <%= f.label :aс31, 'Кмментарий' %>
       <%= f.text_area(:ac31, rows: 3) %></p>
   <div class="actions">
     <%= f.submit %>
