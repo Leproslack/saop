@@ -1,13 +1,13 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
 
-
   def get_media_for_category
     @poll.cat1 = poll_params.select{|k, v| k =~ /^a1.*/}.values.inject(0){|sum,x| sum.to_f + x.to_f }/3*100/5
     @poll.cat2 = poll_params.select{|k, v| k =~ /^a2.*/}.values.inject(0){|sum,x| sum.to_f + x.to_f }/2*100/5
     @poll.cat3 = poll_params.select{|k, v| k =~ /^a3.*/}.values.inject(0){|sum,x| sum.to_f + x.to_f }/1*100/5
     @poll.poll_rate = poll_params.select{|k, v| k =~ /^a.*/}.values.inject(0){|sum,x| sum.to_f + x.to_f }/6*100/5
   end
+
   # GET /polls
   # GET /polls.json
 
