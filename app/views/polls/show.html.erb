@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @poll.name %>
+</p>
+
+<ol>
+  <% @poll.questions.each do |question| %>
+    <li><% question.content %>
+  <% end %>
+</ol>
+
+<%= link_to 'Edit', edit_poll_path(@poll) %> |
+<%= link_to 'Back', polls_path %>
