@@ -12,19 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+      <p><%= poll.name %></p>
+    <%= f.hidden_field :name %>
   </div>
   <div class="field">
+    <ol>
+      <% @poll.questions.each do |question| %>
+        <li><%= question.content %>
+      <% end %>
+    </ol>
       <%= f.fields_for :questions do |builder| %>
-
-            <p>
-                <%= builder.label :content %>
-                <%= builder.text_area :content, :rows => 3 %>
-            </p>
+      <%= builder.hidden_field :content %>
       <% end %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Save" %>
   </div>
 <% end %>
