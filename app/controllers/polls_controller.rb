@@ -14,13 +14,14 @@ class PollsController < ApplicationController
   end
 
   # GET /polls/new
+
   def new
     @poll = Poll.new
-
-    #Qbuilder.all.each do |q|
-
-      3.times {@poll.questions.build}
-    #end
+    #@poll.name = "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}"
+    3.times {@poll.questions.build}
+    # Qbuilder.all.each do |q|
+    #   @poll.questions.build(content: q.name)
+    # end
 
   end
 
@@ -30,9 +31,10 @@ class PollsController < ApplicationController
 
   # POST /polls
   # POST /polls.json
+
   def create
     @poll = Poll.new(poll_params)
-
+      binding.pry
     respond_to do |format|
       if @poll.save
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
