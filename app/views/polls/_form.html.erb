@@ -16,13 +16,8 @@
     <%= f.hidden_field :name %>
   </div>
   <div class="field">
-    <ol>
-      <% @poll.questions.each do |question| %>
-        <li><%= question.content %>
-      <% end %>
-    </ol>
       <%= f.fields_for :questions do |builder| %>
-      <%= builder.hidden_field :content %>
+          <%= render "question_fields", :f => builder %>
       <% end %>
   </div>
   <div class="actions">

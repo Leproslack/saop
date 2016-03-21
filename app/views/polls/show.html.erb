@@ -8,6 +8,12 @@
 <ol>
   <% @poll.questions.each do |question| %>
     <li><%= question.content %>
+      <% question.answers.each do |answer| %>
+      <ol>
+        <li><%= answer.answer_rate %></li>
+        <li><%= answer.answer_comment %></li>
+      </ol>
+      <% end %>
   <% end %>
 </ol>
 

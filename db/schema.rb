@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316202039) do
+ActiveRecord::Schema.define(version: 20160320235353) do
+
+  create_table "answers", force: :cascade do |t|
+    t.string   "answer_rate"
+    t.text     "answer_comment"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "question_id"
+  end
+
+  add_index "answers", ["answer_rate"], name: "index_answers_on_answer_rate"
 
   create_table "polls", force: :cascade do |t|
     t.string   "name"

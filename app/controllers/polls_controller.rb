@@ -18,9 +18,9 @@ class PollsController < ApplicationController
   def new
     @poll = Poll.create(name: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}")
     Qbuilder.all.each do |q|
-      @poll.questions.create(content: q.name)
+      question = @poll.questions.create(content: q.name)
+      question.answers.create(answer_rate: nil, answer_comment: nil)
     end
-
   end
 
   # GET /polls/1/edit
@@ -32,7 +32,6 @@ class PollsController < ApplicationController
 
   def create
     @poll = Poll.new(poll_params)
-      binding.pry
     respond_to do |format|
       if @poll.save
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
@@ -76,7 +75,7 @@ class PollsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
-      params.require(:poll).permit(:name, questions_attributes: [:content, :id])
+      params.require(:poll).permit(:name, questions_attributes: [:content, :id, answers_attributes: [:answer_rate, :answer_comment, :id]])
     end
 
 end

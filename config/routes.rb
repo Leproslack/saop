@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :answers
   resources :qbuilders
   resources :polls
   resources :questions
