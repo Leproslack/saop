@@ -16,12 +16,11 @@ class PollsController < ApplicationController
   # GET /polls/new
 
   def new
-    @poll = Poll.create(name: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}")
+    @poll = Poll.new(name: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}")
     Qbuilder.all.each do |q|
-      question = @poll.questions.create(content: q.name, category: q.category)
-      question.answers.create(answer_rate: nil, answer_comment: nil)
+      question = @poll.questions.new(content: q.name, category: q.category)
+      question.answers.new(answer_rate: nil, answer_comment: nil)
     end
-    redirect_to edit_poll_path(@poll)
   end
 
   # GET /polls/1/edit
@@ -33,6 +32,17 @@ class PollsController < ApplicationController
   # POST /polls.json
 
   def create
+    @poll = Poll.new(poll_params)
+      binding.pry
+    respond_to do |format|
+      if @poll.save
+        format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
+        format.json { render :show, status: :created, location: @poll }
+      else
+        format.html { render :new }
+        format.json { render json: @poll.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /polls/1
