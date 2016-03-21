@@ -16,8 +16,8 @@
     <%= f.hidden_field :name %>
   </div>
   <div class="field">
-      <%= f.fields_for :questions do |builder| %>
-          <%= render "question_fields", :f => builder %>
+      <%= f.fields_for :categories do |builder| %>
+          <%= render "categories_fields", :f => builder %>
       <% end %>
   </div>
   <div class="actions">

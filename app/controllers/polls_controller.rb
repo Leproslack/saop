@@ -1,7 +1,6 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
 
-
   # GET /polls
   # GET /polls.json
   def index
@@ -11,6 +10,7 @@ class PollsController < ApplicationController
   # GET /polls/1
   # GET /polls/1.json
   def show
+
   end
 
   # GET /polls/new
@@ -18,7 +18,8 @@ class PollsController < ApplicationController
   def new
     @poll = Poll.new(name: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}")
     Qbuilder.all.each do |q|
-      question = @poll.questions.new(content: q.name, category: q.category)
+      category = @poll.categories.new(category_name: q.category)
+      question = category.questions.new(content: q.name)
       question.answers.new(answer_rate: nil, answer_comment: nil)
     end
   end
@@ -33,7 +34,7 @@ class PollsController < ApplicationController
 
   def create
     @poll = Poll.new(poll_params)
-      binding.pry
+      #binding.pry
     respond_to do |format|
       if @poll.save
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
@@ -79,8 +80,9 @@ class PollsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
       params.require(:poll).permit(:name, :pos_rate,
-                                        questions_attributes: [:content, :id, :category,
-                                              answers_attributes: [:answer_rate, :answer_comment, :id]])
+                      categories_attributes: [ :category_name, :id,
+                                questions_attributes: [:content, :id, :category,
+                                      answers_attributes: [:answer_rate, :answer_comment, :id]]])
     end
 
 end

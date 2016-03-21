@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
 
+  resources :categories
   resources :qbuilders
   resources :polls do
     resources :questions do

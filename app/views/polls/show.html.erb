@@ -6,17 +6,20 @@
 </p>
 <p>
   <strong>Pos rate:</strong>
-  <%= @poll.pos_rate %>
+
 </p>
 
 <ol>
-  <% @poll.questions.each do |question| %>
-    <li><%= question.content %>
-      <% question.answers.each do |answer| %>
+  <% @poll.categories.each do |category| %>
+    <li><%= category.category_name %></li>
+      <% category.questions.each do |question| %>
+      <li><%= question.content %></li>
+        <% question.answers.each do |answer| %>
       <ol>
         <li><%= answer.answer_rate %></li>
         <li><%= answer.answer_comment %></li>
       </ol>
+      <% end %>
       <% end %>
   <% end %>
 </ol>

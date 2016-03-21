@@ -14,8 +14,8 @@
     <% @polls.each do |poll| %>
       <tr>
         <td><%= poll.name %></td>
-          <% poll.questions.each do |q| %>
-          <td><%= q.content %></td>
+          <% poll.categories.each do |q| %>
+          <td><%= q.category_name %></td>
 
           <% end %>
         <td><%= link_to 'Show', poll %></td>

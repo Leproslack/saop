@@ -1,4 +1,4 @@
 class Poll < ApplicationRecord
-  has_many :questions, :dependent => :destroy
-  accepts_nested_attributes_for :questions
+  has_many :categories, :dependent => :destroy
+  accepts_nested_attributes_for :categories
 end

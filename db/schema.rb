@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321123925) do
+ActiveRecord::Schema.define(version: 20160321203628) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer_rate"
@@ -23,14 +23,18 @@ ActiveRecord::Schema.define(version: 20160321123925) do
 
   add_index "answers", ["answer_rate"], name: "index_answers_on_answer_rate"
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "category_name"
+    t.integer  "poll_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "polls", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "pos_rate"
-    t.string   "pos_name"
-    t.integer  "stuff_rate"
-    t.string   "stuff_name"
+    t.integer  "poll_rate"
   end
 
   create_table "qbuilders", force: :cascade do |t|
@@ -42,10 +46,9 @@ ActiveRecord::Schema.define(version: 20160321123925) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "content"
-    t.integer  "poll_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "category"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end
