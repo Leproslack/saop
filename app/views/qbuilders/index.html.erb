@@ -1,17 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Qbuilders</h1>
-
+<h1>Qbuilders</h1></br>
+<div>
+  <h3>Stuff questions</h3>
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
   <tbody>
-    <% @qbuilders.each do |qbuilder| %>
+    <% @qbuilders.where(category: 'Stuff').each do |qbuilder| %>
       <tr>
         <td><%= qbuilder.name %></td>
         <td><%= link_to 'Show', qbuilder %></td>
@@ -21,7 +15,22 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
+<div>
+  <h3>POS questions</h3>
+<table>
+    <tbody>
+    <% @qbuilders.where(category: 'Pos checklist').each do |qbuilder| %>
+      <tr>
+        <td><%= qbuilder.name %></td>
+        <td><%= link_to 'Show', qbuilder %></td>
+        <td><%= link_to 'Edit', edit_qbuilder_path(qbuilder) %></td>
+        <td><%= link_to 'Destroy', qbuilder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
 <br>
 
 <%= link_to 'New Qbuilder', new_qbuilder_path %>

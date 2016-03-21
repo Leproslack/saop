@@ -14,18 +14,19 @@ class QbuildersController < ApplicationController
 
   # GET /qbuilders/new
   def new
+    checklist
     @qbuilder = Qbuilder.new
   end
 
   # GET /qbuilders/1/edit
   def edit
+    checklist
   end
 
   # POST /qbuilders
   # POST /qbuilders.json
   def create
     @qbuilder = Qbuilder.new(qbuilder_params)
-
     respond_to do |format|
       if @qbuilder.save
         format.html { redirect_to @qbuilder, notice: 'Qbuilder was successfully created.' }
@@ -69,6 +70,10 @@ class QbuildersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def qbuilder_params
-      params.require(:qbuilder).permit(:name)
+      params.require(:qbuilder).permit(:name, :category)
+    end
+
+    def checklist
+      @types = ["Pos checklist", "Stuff"]
     end
 end

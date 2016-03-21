@@ -18,7 +18,7 @@ class PollsController < ApplicationController
   def new
     @poll = Poll.create(name: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}")
     Qbuilder.all.each do |q|
-      question = @poll.questions.create(content: q.name)
+      question = @poll.questions.create(content: q.name, category: q.category)
       question.answers.create(answer_rate: nil, answer_comment: nil)
     end
     redirect_to edit_poll_path(@poll)
@@ -26,6 +26,7 @@ class PollsController < ApplicationController
 
   # GET /polls/1/edit
   def edit
+    @test = Question.where(category: "Pos checklist", id: @poll)
   end
 
   # POST /polls
@@ -37,6 +38,7 @@ class PollsController < ApplicationController
   # PATCH/PUT /polls/1
   # PATCH/PUT /polls/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @poll.update(poll_params)
         format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
@@ -66,8 +68,8 @@ class PollsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
-      params.require(:poll).permit(:name,
-                                        questions_attributes: [:content, :id,
+      params.require(:poll).permit(:name, :pos_rate,
+                                        questions_attributes: [:content, :id, :category,
                                               answers_attributes: [:answer_rate, :answer_comment, :id]])
     end
 

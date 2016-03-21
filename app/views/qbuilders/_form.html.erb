@@ -15,6 +15,14 @@
     <%= f.label :name %>
     <%= f.text_area :name %>
   </div>
+  <div class="field">
+    <%= f.select(:category) do %>
+      <% @types.each do |c| -%>
+        <%= content_tag(:option, c, value: c) %>
+      <% end %>
+    <% end %>
+
+    </div>
 
   <div class="actions">
     <%= f.submit %>

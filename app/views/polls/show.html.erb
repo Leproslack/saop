@@ -4,6 +4,10 @@
   <strong>Name:</strong>
   <%= @poll.name %>
 </p>
+<p>
+  <strong>Pos rate:</strong>
+  <%= @poll.pos_rate %>
+</p>
 
 <ol>
   <% @poll.questions.each do |question| %>

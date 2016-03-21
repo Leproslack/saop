@@ -1,6 +1,8 @@
 
-<%= f.object[:content] %><br />
-<%= f.hidden_field :content, :rows => 3 %><br />
+<%= f.object[:content] %>
+<%= f.hidden_field :content%>
+<%= f.object[:category] %>
+<%= f.hidden_field :category %>
 
 <%= f.fields_for :answers do |builder| %>
   <%= render 'answer_fields', :f => builder %>
