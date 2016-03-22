@@ -1,0 +1,23 @@
+<%= form_for(formbuilder) do |f| %>
+  <% if formbuilder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(formbuilder.errors.count, "error") %> prohibited this formbuilder from being saved:</h2>
+
+      <ul>
+      <% formbuilder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :category %>
+    <%= f.text_field :category %>
+  </div>
+  
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @formbuilder.category %>
+</p>
+
+<p>
+  <strong>Questions:</strong></br>
+  <% @formbuilder.formquestions.each do |question| %>
+    <%= question.question_build %></br>
+  <% end %>
+</p>
+
+<%= form_for ([@formbuilder, @formbuilder.formquestions.build]) do |builder| %>
+    <%= render "form_questions_fields", :f => builder %>
+<% end %>
+
+<%= link_to 'Edit', edit_formbuilder_path(@formbuilder) %> |
+<%= link_to 'Back', formbuilders_path %>

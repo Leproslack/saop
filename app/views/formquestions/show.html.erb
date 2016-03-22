@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question build:</strong>
+  <%= @formquestion.question_build %>
+</p>
+
+<p>
+  <strong>Formbuilder:</strong>
+  <%= @formquestion.formbuilder_id %>
+</p>
+
+<%= link_to 'Edit', edit_formquestion_path(@formquestion) %> |
+<%= link_to 'Back', formquestions_path %>
