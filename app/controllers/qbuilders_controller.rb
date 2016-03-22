@@ -14,7 +14,6 @@ class QbuildersController < ApplicationController
 
   # GET /qbuilders/new
   def new
-    checklist
     @qbuilder = Qbuilder.new
   end
 
@@ -73,7 +72,4 @@ class QbuildersController < ApplicationController
       params.require(:qbuilder).permit(:name, :category)
     end
 
-    def checklist
-      @types = ["Pos checklist", "Stuff"]
-    end
 end
