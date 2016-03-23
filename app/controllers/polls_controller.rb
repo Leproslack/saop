@@ -21,7 +21,7 @@ class PollsController < ApplicationController
       category = @poll.categories.new(category_name: cat.name)
         cat.formquestions.each do |quest|
           question = category.questions.new(content: quest.question_name)
-          question.answers.new(answer_rate: nil, answer_comment: nil)
+          # question.answers.new(answer_rate: nil, answer_comment: nil)
         end
     end
   end
@@ -36,7 +36,7 @@ class PollsController < ApplicationController
 
   def create
     @poll = Poll.new(poll_params)
-      #binding.pry
+      binding.pry
     respond_to do |format|
       if @poll.save
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
@@ -82,9 +82,8 @@ class PollsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
       params.require(:poll).permit(:name, :pos_rate,
-                      categories_attributes: [ :category_name, :id,
-                                questions_attributes: [:content, :id, :category,
-                                      answers_attributes: [:answer_rate, :answer_comment, :id]]])
+                categories_attributes: [ :category_name, :id,
+                          questions_attributes: [:content, :id, :question_rate, :question_comment]])
     end
 
 end

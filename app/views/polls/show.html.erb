@@ -14,12 +14,10 @@
     <li><%= category.category_name %></li>
       <% category.questions.each do |question| %>
       <li><%= question.content %></li>
-        <% question.answers.each do |answer| %>
       <ol>
-        <li><%= answer.answer_rate %></li>
-        <li><%= answer.answer_comment %></li>
+        <li><%= question.question_rate %></li>
+        <li><%= question.question_comment %></li>
       </ol>
-      <% end %>
       <% end %>
   <% end %>
 </ol>
