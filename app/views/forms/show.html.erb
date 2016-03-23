@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @form.name %>
+</p>
+<ol>
+  <% @form.formquestions.each do |question| %>
+      <li><%= question.question_name %></li>
+      <p><%= link_to 'Edit', edit_formquestion_path(question) %></td> |
+      <%= link_to 'Destroy', [@form, question], method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
+</ol>
+<p>
+  <%= form_for ([ @form, @form.formquestions.build ]) do |f| %>
+  <%= f.label :question_name, "Question Title" %>
+    <%= f.text_area :question_name %></br>
+    <%= f.submit "Save" %></p>
+  <% end %>
+</p>
+<%= link_to 'Edit', edit_form_path(@form) %> |
+<%= link_to 'Back', forms_path %>

@@ -49,7 +49,7 @@ class PollsController < ApplicationController
   # PATCH/PUT /polls/1
   # PATCH/PUT /polls/1.json
   def update
-    binding.pry
+  #  binding.pry
     respond_to do |format|
       if @poll.update(poll_params)
         format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }

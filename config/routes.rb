@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-
-
-
+  resources :formquestions
+  resources :forms do
+      resources :formquestions
+  end
   resources :categories
   resources :qbuilders
   resources :polls do

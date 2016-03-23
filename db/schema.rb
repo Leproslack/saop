@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323164246) do
+ActiveRecord::Schema.define(version: 20160323171348) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer_rate"
@@ -28,6 +28,21 @@ ActiveRecord::Schema.define(version: 20160323164246) do
     t.integer  "poll_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "formquestions", force: :cascade do |t|
+    t.string   "question_name"
+    t.integer  "form_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "formquestions", ["form_id"], name: "index_formquestions_on_form_id"
+
+  create_table "forms", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "polls", force: :cascade do |t|
