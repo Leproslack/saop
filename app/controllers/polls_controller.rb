@@ -61,6 +61,13 @@ class PollsController < ApplicationController
   def update
     respond_to do |format|
       if @poll.update(poll_params)
+        @poll.categories.each do |cat|
+          rate = 0
+          cat.questions.each do |quest|
+              rate += quest.question_rate
+          end
+          @poll.categories.where(category_name: cat.category_name).update(category_rate: rate)
+        end
         format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
         format.json { render :show, status: :ok, location: @poll }
       else
