@@ -53,16 +53,6 @@ class PollsController < ApplicationController
     respond_to do |format|
       if @poll.save
         calculate_rate
-        # poll_rate = 0
-        # @poll.categories.each do |cat|
-        #   category_rate = 0
-        #   cat.questions.each do |quest|
-        #       category_rate += quest.question_rate
-        #       poll_rate += quest.question_rate
-        #   end
-        #   @poll.categories.where(category_name: cat.category_name).update(category_rate: category_rate)
-        #   @poll.update(poll_rate: poll_rate)
-        # end
   #binding.pry
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
         format.json { render :show, status: :created, location: @poll }
@@ -79,16 +69,6 @@ class PollsController < ApplicationController
     respond_to do |format|
       if @poll.update(poll_params)
         calculate_rate
-        # poll_rate = 0
-        # @poll.categories.each do |cat|
-        #   category_rate = 0
-        #   cat.questions.each do |quest|
-        #       category_rate += quest.question_rate
-        #       poll_rate += quest.question_rate
-        #   end
-        #   @poll.categories.where(category_name: cat.category_name).update(category_rate: category_rate)
-        #   @poll.update(poll_rate: poll_rate)
-        # end
         format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
         format.json { render :show, status: :ok, location: @poll }
       else
