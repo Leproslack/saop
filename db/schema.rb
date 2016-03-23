@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323171348) do
+ActiveRecord::Schema.define(version: 20160323210347) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer_rate"
@@ -20,8 +20,6 @@ ActiveRecord::Schema.define(version: 20160323171348) do
     t.datetime "updated_at",     null: false
     t.integer  "question_id"
   end
-
-  add_index "answers", ["answer_rate"], name: "index_answers_on_answer_rate"
 
   create_table "categories", force: :cascade do |t|
     t.string   "category_name"
