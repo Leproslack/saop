@@ -1,2 +1,0 @@
-class Qbuilder < ApplicationRecord
-end

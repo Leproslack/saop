@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321203628) do
+ActiveRecord::Schema.define(version: 20160323164246) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer_rate"
@@ -35,13 +35,6 @@ ActiveRecord::Schema.define(version: 20160321203628) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "poll_rate"
-  end
-
-  create_table "qbuilders", force: :cascade do |t|
-    t.text     "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "category"
   end
 
   create_table "questions", force: :cascade do |t|
