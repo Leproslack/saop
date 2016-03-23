@@ -9,18 +9,18 @@
 
 </p>
 
-<ol>
-  <% @poll.categories.each do |category| %>
-    <li><%= category.category_name %></li>
-      <% category.questions.each do |question| %>
-      <li><%= question.content %></li>
-      <ol>
-        <li><%= question.question_rate %></li>
-        <li><%= question.question_comment %></li>
-      </ol>
-      <% end %>
-  <% end %>
-</ol>
+
+    <% @poll.categories.each do |category| %>
+  <li><h3><%= category.category_name %> Rate: <%= category.category_rate %></h3></li>
+  <ol>
+          <% category.questions.each do |question| %>
+    <h4><li><%= question.content %></li></h4>
+      <p><strong>Rate: </strong><%= question.question_rate %></br>
+    <strong>Comment: </strong><%= question.question_comment %></p>
+          <% end %>
+  </ol>
+    <% end %>
+
 
 <%= link_to 'Edit', edit_poll_path(@poll) %> |
 <%= link_to 'Back', polls_path %>

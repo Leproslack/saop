@@ -36,9 +36,17 @@ class PollsController < ApplicationController
 
   def create
     @poll = Poll.new(poll_params)
-      binding.pry
+      # binding.pry
     respond_to do |format|
       if @poll.save
+        @poll.categories.each do |cat|
+          rate = 0
+          cat.questions.each do |quest|
+              rate += quest.question_rate
+          end
+          @poll.categories.where(category_name: cat.category_name).update(category_rate: rate)
+        end
+  binding.pry
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
         format.json { render :show, status: :created, location: @poll }
       else
@@ -51,7 +59,6 @@ class PollsController < ApplicationController
   # PATCH/PUT /polls/1
   # PATCH/PUT /polls/1.json
   def update
-  #  binding.pry
     respond_to do |format|
       if @poll.update(poll_params)
         format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
@@ -82,8 +89,8 @@ class PollsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
       params.require(:poll).permit(:name, :pos_rate,
-                categories_attributes: [ :category_name, :id,
-                          questions_attributes: [:content, :id, :question_rate, :question_comment]])
+          categories_attributes: [ :category_name, :id,
+                    questions_attributes: [:content, :id, :question_rate, :question_comment]])
     end
 
 end
