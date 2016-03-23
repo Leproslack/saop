@@ -44,7 +44,7 @@ class FormquestionsController < ApplicationController
     #binding.pry
     respond_to do |format|
       if @formquestion.update(formquestion_params)
-        format.html { redirect_to :back, notice: 'Question was successfully updated.' }
+        format.html { redirect_to formquestion_path, notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @formquestion }
       else
         format.html { render :edit }
