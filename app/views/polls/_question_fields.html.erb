@@ -1,7 +1,7 @@
-
-<%= f.object[:content] %>
+<ol>
+<li><%= f.object[:content] %></li>
 <%= f.hidden_field :content%>
-
+</ol>
 <%= f.fields_for :answers do |builder| %>
   <%= render 'answer_fields', :f => builder %>
 <% end %>

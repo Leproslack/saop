@@ -1,5 +1,5 @@
-<%= f.object[:category_name] %>
-<%= f.hidden_field :category_name %>
+<strong><%= f.object[:category_name] %></strong>
+<%= f.hidden_field :category_name %></br>
 
 <%= f.fields_for :questions do |builder| %>
   <%= render 'question_fields', :f => builder %>

@@ -17,10 +17,12 @@ class PollsController < ApplicationController
 
   def new
     @poll = Poll.new(name: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}")
-    Qbuilder.all.each do |q|
-      category = @poll.categories.new(category_name: q.category)
-      question = category.questions.new(content: q.name)
-      question.answers.new(answer_rate: nil, answer_comment: nil)
+    Form.all.each do |cat|
+      category = @poll.categories.new(category_name: cat.name)
+        cat.formquestions.each do |quest|
+          question = category.questions.new(content: quest.question_name)
+          question.answers.new(answer_rate: nil, answer_comment: nil)
+        end
     end
   end
 
