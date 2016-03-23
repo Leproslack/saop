@@ -2,6 +2,9 @@
 <li><%= f.object[:content] %></li>
 <%= f.hidden_field :content%>
 </ol>
-<%= f.fields_for :answers do |builder| %>
-  <%= render 'answer_fields', :f => builder %>
-<% end %>
+<p>
+  <%= f.label :question_rate, "Answer Rate" %>
+  <%= f.number_field :question_rate %>
+  <%= f.label :question_comment, "Comment" %>
+  <%= f.text_field :question_comment %>
+</p>
