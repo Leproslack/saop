@@ -1,6 +1,13 @@
 class FormquestionsController < ApplicationController
   before_action :set_formquestion, only: [:show, :edit, :update, :destroy]
 
+  def calculate_evaluating
+    evaluate_category = 0
+      @form.formquestions.each do |cat|
+            evaluate_category += cat.evaluate_method
+        end
+    @form.update(evaluate_category: evaluate_category)
+  end
   # GET /formquestions
   # GET /formquestions.json
   def index
@@ -29,6 +36,8 @@ class FormquestionsController < ApplicationController
 
     respond_to do |format|
       if @formquestion.save
+        calculate_evaluating
+        binding.pry
         format.html { redirect_to @form, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @formquestion }
       else
@@ -44,6 +53,7 @@ class FormquestionsController < ApplicationController
     #binding.pry
     respond_to do |format|
       if @formquestion.update(formquestion_params)
+        calculate_evaluating
         format.html { redirect_to formquestion_path, notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @formquestion }
       else
@@ -58,10 +68,13 @@ class FormquestionsController < ApplicationController
   def destroy
     @form = Form.find(params[:form_id])
     @formquestion = @form.formquestions.find(params[:id])
-    @formquestion.destroy
-    respond_to do |format|
-      format.html { redirect_to form_path(@form), notice: 'Question was successfully destroyed.' }
-      format.json { head :no_content }
+    if @formquestion.destroy
+      evaluate_new = @form.evaluate_category - @formquestion.evaluate_method
+      @form.update(evaluate_category: evaluate_new)
+      respond_to do |format|
+        format.html { redirect_to form_path(@form), notice: 'Question was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -73,6 +86,7 @@ class FormquestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def formquestion_params
-      params.require(:formquestion).permit(:question_name, :form_id, :id)
+      params.require(:formquestion).permit(:question_name, :form_id,
+                                      :evaluate_method, :evaluate_category, :id)
     end
 end

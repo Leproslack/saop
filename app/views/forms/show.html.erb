@@ -1,20 +1,21 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Name:</strong><b>Category Evaluating: </b><%= @form.evaluate_category %>
   <%= @form.name %>
 </p>
 <ol>
   <% @form.formquestions.each do |question| %>
-      <li><%= question.question_name %></li>
+      <li><b><%= question.question_name %></b></br> Evaluating Method: <%= question.evaluate_method %></li>
       <p><%= link_to 'Edit', edit_formquestion_path(question) %></td> |
       <%= link_to 'Destroy', [@form, question], method: :delete, data: { confirm: 'Are you sure?' } %></p>
   <% end %>
 </ol>
 <p>
   <%= form_for ([ @form, @form.formquestions.build ]) do |f| %>
-  <%= f.label :question_name, "Question Title" %>
+  <%= f.label :question_name, "Question title" %>
     <%= f.text_area :question_name %></br>
+    <%= f.select :evaluate_method, (0..2) %>
     <%= f.submit "Save" %></p>
   <% end %>
 </p>

@@ -13,12 +13,8 @@
 
   <div class="field">
     <%= f.label :question_name %>
-    <%= f.text_field :question_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :form_id %>
-    <%= f.number_field :form_id %>
+    <%= f.text_field :question_name %></br>
+    <%= f.select :evaluate_method, (0..2) %>
   </div>
 
   <div class="actions">

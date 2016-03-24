@@ -25,9 +25,9 @@ class FormsController < ApplicationController
   # POST /forms.json
   def create
     @form = Form.new(form_params)
-
     respond_to do |format|
       if @form.save
+
         format.html { redirect_to @form, notice: 'Form was successfully created.' }
         format.json { render :show, status: :created, location: @form }
       else
@@ -69,6 +69,6 @@ class FormsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def form_params
-      params.require(:form).permit(:name, :id)
+      params.require(:form).permit(:name, :evaluate_total, :id)
     end
 end

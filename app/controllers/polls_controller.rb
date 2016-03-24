@@ -34,7 +34,6 @@ class PollsController < ApplicationController
       category = @poll.categories.new(category_name: cat.name)
         cat.formquestions.each do |quest|
           question = category.questions.new(content: quest.question_name)
-          # question.answers.new(answer_rate: nil, answer_comment: nil)
         end
     end
   end
