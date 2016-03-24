@@ -1,5 +1,5 @@
 class FormquestionsController < ApplicationController
-  before_action :set_formquestion, only: [:show, :edit, :update, :destroy]
+  before_action :set_formquestion, only: [:show, :destroy]
 
   def calculate_evaluating
     evaluate_category = 0
@@ -7,6 +7,11 @@ class FormquestionsController < ApplicationController
             evaluate_category += cat.evaluate_method
         end
     @form.update(evaluate_category: evaluate_category)
+  end
+
+  def update_evaluate_after_destroy
+    evaluate_new = @form.evaluate_category - @formquestion.evaluate_method
+    @form.update(evaluate_category: evaluate_new)
   end
   # GET /formquestions
   # GET /formquestions.json
@@ -24,40 +29,18 @@ class FormquestionsController < ApplicationController
     @formquestion = Formquestion.new
   end
 
-  # GET /formquestions/1/edit
-  def edit
-  end
-
   # POST /formquestions
   # POST /formquestions.json
   def create
     @form = Form.find(params[:form_id])
     @formquestion = @form.formquestions.create(formquestion_params)
-
     respond_to do |format|
       if @formquestion.save
         calculate_evaluating
-        binding.pry
         format.html { redirect_to @form, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @formquestion }
       else
         format.html { render :new }
-        format.json { render json: @formquestion.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /formquestions/1
-  # PATCH/PUT /formquestions/1.json
-  def update
-    #binding.pry
-    respond_to do |format|
-      if @formquestion.update(formquestion_params)
-        calculate_evaluating
-        format.html { redirect_to formquestion_path, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @formquestion }
-      else
-        format.html { render :edit }
         format.json { render json: @formquestion.errors, status: :unprocessable_entity }
       end
     end
@@ -69,8 +52,7 @@ class FormquestionsController < ApplicationController
     @form = Form.find(params[:form_id])
     @formquestion = @form.formquestions.find(params[:id])
     if @formquestion.destroy
-      evaluate_new = @form.evaluate_category - @formquestion.evaluate_method
-      @form.update(evaluate_category: evaluate_new)
+      update_evaluate_after_destroy
       respond_to do |format|
         format.html { redirect_to form_path(@form), notice: 'Question was successfully destroyed.' }
         format.json { head :no_content }

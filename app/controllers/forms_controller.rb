@@ -27,7 +27,6 @@ class FormsController < ApplicationController
     @form = Form.new(form_params)
     respond_to do |format|
       if @form.save
-
         format.html { redirect_to @form, notice: 'Form was successfully created.' }
         format.json { render :show, status: :created, location: @form }
       else

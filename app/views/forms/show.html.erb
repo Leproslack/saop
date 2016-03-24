@@ -1,14 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong><b>Category Evaluating: </b><%= @form.evaluate_category %>
-  <%= @form.name %>
+  <strong>Name:   <%= @form.name %></strong></br><b>Evaluating method: </b><%= @form.evaluate_category %>
+
 </p>
 <ol>
   <% @form.formquestions.each do |question| %>
       <li><b><%= question.question_name %></b></br> Evaluating Method: <%= question.evaluate_method %></li>
-      <p><%= link_to 'Edit', edit_formquestion_path(question) %></td> |
-      <%= link_to 'Destroy', [@form, question], method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <p><%= link_to 'Destroy', [@form, question], method: :delete, data: { confirm: 'Are you sure?' } %></p>
   <% end %>
 </ol>
 <p>
