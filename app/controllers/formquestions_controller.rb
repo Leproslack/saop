@@ -2,16 +2,16 @@ class FormquestionsController < ApplicationController
   before_action :set_formquestion, only: [:show, :destroy]
 
   def calculate_evaluating
-    evaluate_category = 0
+    score_category = 0
       @form.formquestions.each do |cat|
-            evaluate_category += cat.evaluate_method
+            score_category += cat.evaluate_method
         end
-    @form.update(evaluate_category: evaluate_category)
+    @form.update(score_category: score_category)
   end
 
   def update_evaluate_after_destroy
-    evaluate_new = @form.evaluate_category - @formquestion.evaluate_method
-    @form.update(evaluate_category: evaluate_new)
+    evaluate_new = @form.score_category - @formquestion.evaluate_method
+    @form.update(score_category: evaluate_new)
   end
   # GET /formquestions
   # GET /formquestions.json
@@ -69,6 +69,6 @@ class FormquestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def formquestion_params
       params.require(:formquestion).permit(:question_name, :form_id,
-                                      :evaluate_method, :evaluate_category, :id)
+                                      :evaluate_method, :score_category, :id)
     end
 end
