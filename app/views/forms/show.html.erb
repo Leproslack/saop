@@ -14,7 +14,7 @@
   <%= form_for ([ @form, @form.formquestions.build ]) do |f| %>
   <%= f.label :question_name, "Question title" %>
     <%= f.text_area :question_name %></br>
-    <%= f.select :evaluate_method, (0..2) %>
+    <%= f.select :evaluate_method, (1..2) %>
     <%= f.submit "Save" %></p>
   <% end %>
 </p>

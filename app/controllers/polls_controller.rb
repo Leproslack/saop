@@ -30,12 +30,15 @@ class PollsController < ApplicationController
 
   def new
     @poll = Poll.new(name: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}")
+    total_score = 0
     Form.all.each do |cat|
-      category = @poll.categories.new(category_name: cat.name)
+      total_score += cat.score_category
+      category = @poll.categories.new(category_name: cat.name, category_score: cat.score_category )
         cat.formquestions.each do |quest|
-          question = category.questions.new(content: quest.question_name)
+          question = category.questions.new(content: quest.question_name, question_score: quest.evaluate_method)
         end
     end
+    @poll.update(total_score: total_score)
   end
 
   # GET /polls/1/edit

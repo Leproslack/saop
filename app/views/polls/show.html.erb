@@ -5,9 +5,12 @@
   <%= @poll.name %>
 </p>
 <p>
-  <strong>Poll rate: <%= @poll.poll_rate %></strong>
-
+  <strong>Total: <%= @poll.total_score %></strong>
 </p>
+<p>
+  <strong>Poll rate: <%= @poll.poll_rate %></strong>
+</p>
+
 
 
     <% @poll.categories.each do |category| %>

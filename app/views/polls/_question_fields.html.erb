@@ -1,10 +1,11 @@
-<ol>
+
 <li><%= f.object[:content] %></li>
 <%= f.hidden_field :content%>
-</ol>
+
 <p>
   <%= f.label :question_rate, "Answer Rate" %>
-  <%= f.number_field :question_rate %>
+  <%= f.select :question_rate, (0..f.object[:question_score]) %>
   <%= f.label :question_comment, "Comment" %>
-  <%= f.text_field :question_comment %>
+  <%= f.text_area :question_comment %>
 </p>
+<%= f.object[:question_score] %>
