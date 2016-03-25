@@ -1,29 +1,44 @@
+<div class=rows>
+
 <p id="notice"><%= notice %></p>
+<legend>
+  <h2>Shop POS and Business quality checklist</h2>
+  <p>Doc Id: <small><%= @poll.id %></small></p>
+  <p>Date: <small><%= @poll.created_at.strftime("%d.%m.%Y. %H:%M:%S") %></small></p>
+</legend>
+<div class="col-xs-9">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Quality and Excellence</th>
+      <th>Evaluating method</th>
+      <th>Rate</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @poll.categories.each do |cat| %>
+  <tr>
+    <td><b><%= cat.category_name %></b></td>
+    <td><b>Score: <%= cat.category_score %></b></td>
+    <td><b>Rate: <%= cat.category_rate %></b></td>
+    <td></td>
+  </tr>
+        <% cat.questions.each do |question| %>
+  <tr>
+    <td><%= question.content %></td>
+    <td>0-<%= question.question_score %></td>
+    <td><%= question.question_rate %></td>
+    <td><%= question.question_comment %></td>
+  </tr>
 
-<p>
-  <strong>Name:</strong>
-  <%= @poll.name %>
-</p>
-<p>
-  <strong>Total: <%= @poll.total_score %></strong>
-</p>
-<p>
-  <strong>Poll rate: <%= @poll.poll_rate %></strong>
-</p>
-
-
-
-    <% @poll.categories.each do |category| %>
-  <li><h3><%= category.category_name %> Rate: <%= category.category_rate %></h3></li>
-  <ol>
-          <% category.questions.each do |question| %>
-    <h4><li><%= question.content %></li></h4>
-      <p><strong>Rate: </strong><%= question.question_rate %></br>
-    <strong>Comment: </strong><%= question.question_comment %></p>
-          <% end %>
-  </ol>
+      <% end %>
     <% end %>
+  </tbody>
+</table>
 
 
 <%= link_to 'Edit', edit_poll_path(@poll) %> |
 <%= link_to 'Back', polls_path %>
+</div>
+</div>

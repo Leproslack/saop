@@ -1,12 +1,12 @@
 
-<li><%= f.object[:content] %></li>
+<div class="control-group">
+<li><label class="control-label"><%= f.object[:content] %></label></li>
 <%= f.hidden_field :content%>
 <%= f.hidden_field :question_score%>
-
-<p>
-  <%= f.label :question_rate, "Answer Rate" %>
-  <%= f.select :question_rate, (0..f.object[:question_score]) %>
-  <%= f.label :question_comment, "Comment" %>
-  <%= f.text_area :question_comment %>
-</p>
-<%= f.object[:question_score] %>
+  <div class="controls">
+    <%= f.select(:question_rate, 0..f.object[:question_score],  {include_blank: "Select rate"}, {class: 'input-medium'} ) %>
+  </div>
+    <div class="controls">
+      <%= f.text_area :question_comment %>
+    </div>
+</div>

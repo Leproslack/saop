@@ -1,8 +1,9 @@
-<strong><%= f.object[:category_name] %></strong>
+
+<%= f.object[:category_name] %>
 <%= f.hidden_field :category_name %></br>
 <%= f.hidden_field :category_score%>
-<ol>
+<ul>
 <%= f.fields_for :questions do |builder| %>
   <%= render 'question_fields', :f => builder %>
 <% end %>
-</ol>
+</ul>
