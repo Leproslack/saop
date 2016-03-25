@@ -5,6 +5,7 @@
   <h2>Shop POS and Business quality checklist</h2>
   <p>Doc Id: <small><%= @poll.id %></small></p>
   <p>Date: <small><%= @poll.created_at.strftime("%d.%m.%Y. %H:%M:%S") %></small></p>
+  <p>Poll rate: <small><%= ((@poll.poll_rate.to_f) / (@poll.total_score.to_f) *100).round %>%</small></p>
 </legend>
 <div class="col-xs-9">
 <table class="table table-bordered">
@@ -22,7 +23,7 @@
     <td><b><%= cat.category_name %></b></td>
     <td><b>Score: <%= cat.category_score %></b></td>
     <td><b>Rate: <%= cat.category_rate %></b></td>
-    <td></td>
+    <td><b><%= (cat.category_rate.to_f / cat.category_score.to_f * 100).round %>%</b></td>
   </tr>
         <% cat.questions.each do |question| %>
   <tr>
