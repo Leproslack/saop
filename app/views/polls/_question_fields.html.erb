@@ -1,8 +1,9 @@
 
+<div class="list-group">
 
         <div class="form-group">
-          <div class="col-sm-8">
-          <label><%= f.object[:content] %></label>
+          <div class="col-sm-6">
+          <label class="list-group-item list-group-item-info"><%= f.object[:content] %></label>
               <%= f.hidden_field :content%>
               <%= f.hidden_field :question_score%>
               <%= f.select(:question_rate, 0..f.object[:question_score],  {include_blank: "Select rate"}, {class: 'form-control'} ) %>
@@ -11,8 +12,9 @@
 
 
         <div class="form-group">
-          <div class="col-sm-8">
-            <%= f.label :question_comment %>
+          <div class="col-sm-6">
             <%= f.text_area :question_comment, class: "form-control"  %>
           </div>
       </div>
+
+</div>
