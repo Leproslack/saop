@@ -16,6 +16,10 @@
     <%= f.hidden_field :name %>
   </div>
   <div class="field">
+      <p><%= poll.total_score %></p>
+    <%= f.hidden_field :total_score %>
+  </div>
+  <div class="field">
       <%= f.fields_for :categories do |builder| %>
           <%= render "categories_fields", :f => builder %>
       <% end %>

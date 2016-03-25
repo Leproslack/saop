@@ -38,7 +38,8 @@ class PollsController < ApplicationController
           question = category.questions.new(content: quest.question_name, question_score: quest.evaluate_method)
         end
     end
-    @poll.update(total_score: total_score)
+    @poll.total_score = total_score
+    binding.pry
   end
 
   # GET /polls/1/edit
@@ -98,7 +99,7 @@ class PollsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
-      params.require(:poll).permit(:name, :pos_rate,
+      params.require(:poll).permit(:name, :total_score,
           categories_attributes: [ :category_name, :id,
                     questions_attributes: [:content, :id, :question_rate, :question_comment]])
     end
