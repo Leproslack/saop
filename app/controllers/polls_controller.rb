@@ -23,7 +23,6 @@ class PollsController < ApplicationController
   # GET /polls/1
   # GET /polls/1.json
   def show
-
   end
 
   # GET /polls/new
@@ -39,12 +38,11 @@ class PollsController < ApplicationController
         end
     end
     @poll.total_score = total_score
-    binding.pry
   end
 
   # GET /polls/1/edit
   def edit
-    @test = Question.where(category: "Pos checklist", id: @poll)
+    # binding.pry
   end
 
   # POST /polls
@@ -100,8 +98,8 @@ class PollsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
       params.require(:poll).permit(:name, :total_score,
-          categories_attributes: [ :category_name, :id,
-                    questions_attributes: [:content, :id, :question_rate, :question_comment]])
+          categories_attributes: [ :category_name, :category_score, :id,
+                    questions_attributes: [:content, :id, :question_rate, :question_comment, :question_score]])
     end
 
 end

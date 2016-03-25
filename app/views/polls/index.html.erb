@@ -13,9 +13,9 @@
   <tbody>
     <% @polls.each do |poll| %>
       <tr>
-        <td><%= poll.name %>: <strong><%= poll.poll_rate %></strong></td>
-          <% poll.categories.each do |q| %>
-          <td><%= q.category_name %>: <strong><%= q.category_rate %></strong></td>
+        <td><%= poll.name %>: <strong><%= ( poll.poll_rate.to_f / poll.total_score.to_f * 100 ).round %>%</strong></td>
+          <% poll.categories.each do |cat| %>
+          <td><%= cat.category_name %>: <strong><%= (cat.category_rate.to_f / cat.category_score.to_f * 100).round %>%</strong></td>
 
           <% end %>
         <td><%= link_to 'Show', poll %></td>
