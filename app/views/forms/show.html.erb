@@ -1,22 +1,53 @@
-<p id="notice"><%= notice %></p>
+<div class="rows">
+      <p id="notice"><%= notice %></p>
+    <legend>
+      <p>Category name: <%= @form.name %></p>
+      <p>Evaluating score: <%= @form.score_category %></p>
+    </legend>
+  <div class="col-xs-9">
+    <table class="table table-bordered">
+      <thead>
+        <th>Question</th>
+        <th>Evaluating method</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
 
-<p>
-  <strong>Name:   <%= @form.name %></strong></br><b>Evaluating method: </b><%= @form.score_category %>
+              <% @form.formquestions.each do |question| %>
+        <tr>
+          <td><%= question.question_name %></td>
+          <td>0-<%= question.evaluate_method %></td>
+          <td><%= link_to 'Destroy', [@form, question], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+              <% end %>
+      </tbody>
+    </table>
 
-</p>
-<ol>
-  <% @form.formquestions.each do |question| %>
-      <li><b><%= question.question_name %></b></br> Evaluating Method: <%= question.evaluate_method %></li>
-      <p><%= link_to 'Destroy', [@form, question], method: :delete, data: { confirm: 'Are you sure?' } %></p>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+  <%= form_for ([ @form, @form.formquestions.build ]), :html => {:class => "form-horizontal"} do |f| %>
+   <div class="form-group">
+      <%= f.label :question_name, "Question title", class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+      <%= f.text_area :question_name, class: "form-control" %></br>
+        </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :evaluate_method, "Question title", class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+      <%= f.select :evaluate_method, (1..2), {include_blank: "Select rate"}, {class: 'form-control'} %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit "Save", class: "btn btn-default" %></p>
+    </div>
+  </div>
   <% end %>
-</ol>
-<p>
-  <%= form_for ([ @form, @form.formquestions.build ]) do |f| %>
-  <%= f.label :question_name, "Question title" %>
-    <%= f.text_area :question_name %></br>
-    <%= f.select :evaluate_method, (1..2) %>
-    <%= f.submit "Save" %></p>
-  <% end %>
-</p>
+  </div>
+</div>
+
 <%= link_to 'Edit', edit_form_path(@form) %> |
 <%= link_to 'Back', forms_path %>
+</div>

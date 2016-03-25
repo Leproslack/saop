@@ -1,12 +1,12 @@
+<div class="rows">
 <p id="notice"><%= notice %></p>
-
-<h1>Forms</h1>
-<table>
+<legend>Categories</legend>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Score</th>
-      <th colspan="3"></th>
+      <th>Name of category</th>
+      <th>Category Score</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -14,14 +14,12 @@
       <tr>
         <td><%= form.name %></td>
         <td><%= form.score_category %></td>
-        <td><%= link_to 'Show', form %></td>
-        <td><%= link_to 'Edit', edit_form_path(form) %></td>
-        <td><%= link_to 'Destroy', form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit Questions', form %> |
+        <%= link_to 'Edit Category name', edit_form_path(form) %> |
+        <%= link_to 'Destroy', form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
 <%= link_to 'New Form', new_form_path %>
+</div>

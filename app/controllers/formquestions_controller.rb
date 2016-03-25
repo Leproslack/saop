@@ -40,7 +40,7 @@ class FormquestionsController < ApplicationController
         format.html { redirect_to @form, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @formquestion }
       else
-        format.html { redirect_to @form, notice: 'Submit all forms!' }
+        format.html { redirect_to @form, notice: 'Submit Evaluate method.' }
         format.json { render json: @formquestion.errors, status: :unprocessable_entity }
       end
     end
