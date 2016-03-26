@@ -1,19 +1,6 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
 
-  def calculate_rate
-    poll_rate = 0
-    @poll.categories.each do |cat|
-      category_rate = 0
-      cat.questions.each do |quest|
-          category_rate += quest.question_rate
-          poll_rate += quest.question_rate
-      end
-      @poll.categories.where(category_name: cat.category_name).update(category_rate: category_rate)
-      @poll.update(poll_rate: poll_rate)
-    end
-  end
-
   # GET /polls
   def index
     @polls = Poll.all
@@ -26,16 +13,8 @@ class PollsController < ApplicationController
   # GET /polls/new
 
   def new
-    @poll = Poll.new(name: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}")
-    total_score = 0
-    Newcategory.all.each do |cat|
-      total_score += cat.new_category_score
-      category = @poll.categories.new(category_name: cat.new_category_name, category_score: cat.new_category_score )
-        cat.newquestions.each do |quest|
-          question = category.questions.new(content: quest.new_question_name, question_score: quest.new_question_score)
-        end
-    end
-    @poll.total_score = total_score
+    @poll = Poll.new
+    Poll.get_attributes_from_template(@poll)
   end
 
   # GET /polls/1/edit
@@ -47,25 +26,24 @@ class PollsController < ApplicationController
   def create
     @poll = Poll.new(poll_params)
       # binding.pry
-    respond_to do |newcategoryat|
+    respond_to do |format|
       if @poll.save
-        calculate_rate
-  #binding.pry
-        newcategoryat.html { redirect_to @poll, notice: 'Poll was successfully created.' }
+        Poll.calculate_rate(@poll)
+        format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
       else
-        newcategoryat.html { render :new }
+        format.html { render :new }
       end
     end
   end
 
   # PATCH/PUT /polls/1
   def update
-    respond_to do |newcategoryat|
+    respond_to do |format|
       if @poll.update(poll_params)
-        calculate_rate
-        newcategoryat.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
+        Poll.calculate_rate(@poll)
+        format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
       else
-        newcategoryat.html { render :edit }
+        format.html { render :edit }
       end
     end
   end
@@ -73,8 +51,8 @@ class PollsController < ApplicationController
   # DELETE /polls/1
   def destroy
     @poll.destroy
-    respond_to do |newcategoryat|
-      newcategoryat.html { redirect_to polls_url, notice: 'Poll was successfully destroyed.' }
+    respond_to do |format|
+      format.html { redirect_to polls_url, notice: 'Poll was successfully destroyed.' }
     end
   end
 

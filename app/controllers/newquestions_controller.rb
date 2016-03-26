@@ -1,18 +1,6 @@
 class NewquestionsController < ApplicationController
   before_action :set_newquestion, only: [:show, :destroy]
 
-  def calculate_evaluating
-    new_category_score = 0
-      @newcategory.newquestions.each do |cat|
-            new_category_score += cat.new_question_score
-        end
-    @newcategory.update(new_category_score: new_category_score)
-  end
-
-  def update_evaluate_after_destroy
-    evaluate_new = @newcategory.new_category_score - @newquestion.new_question_score
-    @newcategory.update(new_category_score: evaluate_new)
-  end
   # GET /newquestions
   def index
     @newquestions = Newquestion.all
@@ -31,12 +19,12 @@ class NewquestionsController < ApplicationController
   def create
     @newcategory = Newcategory.find(params[:newcategory_id])
     @newquestion = @newcategory.newquestions.create(newquestion_params)
-    respond_to do |newcategoryat|
+    respond_to do |format|
       if @newquestion.save
-        calculate_evaluating
-        newcategoryat.html { redirect_to @newcategory, notice: 'Question was successfully created.' }
+        Newquestion.calculate_total_score_of_category(@newcategory)
+        format.html { redirect_to @newcategory, notice: 'Question was successfully created.' }
       else
-        newcategoryat.html { redirect_to @newcategory, notice: 'Submit Evaluate method.' }
+        format.html { redirect_to @newcategory, notice: 'Submit all forms before Save' }
       end
     end
   end
@@ -46,9 +34,9 @@ class NewquestionsController < ApplicationController
     @newcategory = Newcategory.find(params[:newcategory_id])
     @newquestion = @newcategory.newquestions.find(params[:id])
     if @newquestion.destroy
-      update_evaluate_after_destroy
-      respond_to do |newcategoryat|
-        newcategoryat.html { redirect_to newcategory_path(@newcategory), notice: 'Question was successfully destroyed.' }
+      Newquestion.update_total_score_of_category_after_destroy(@newcategory, @newquestion)
+      respond_to do |format|
+        format.html { redirect_to newcategory_path(@newcategory), notice: 'Question was successfully destroyed.' }
       end
     end
   end
