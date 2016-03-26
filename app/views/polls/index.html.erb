@@ -6,9 +6,11 @@
     <tr>
       <th >Poll name</th>
       <th>Pole rate</th>
-      <% @polls.last.categories.each do |cat| %>
-        <th><%= cat.category_name %></th>
-      <% end %>
+          <% @polls.each do |poll| %>
+            <% poll.categories.each do |category|  %>
+      <th><%= category.category_name %></th>
+            <% end %>
+          <% end %>
       <th>Action</th>
     </tr>
   </thead>

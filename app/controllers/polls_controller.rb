@@ -30,11 +30,11 @@ class PollsController < ApplicationController
   def new
     @poll = Poll.new(name: "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}")
     total_score = 0
-    Form.all.each do |cat|
-      total_score += cat.score_category
-      category = @poll.categories.new(category_name: cat.name, category_score: cat.score_category )
-        cat.formquestions.each do |quest|
-          question = category.questions.new(content: quest.question_name, question_score: quest.evaluate_method)
+    Newcategory.all.each do |cat|
+      total_score += cat.new_category_score
+      category = @poll.categories.new(category_name: cat.new_category_name, category_score: cat.new_category_score )
+        cat.newquestions.each do |quest|
+          question = category.questions.new(content: quest.new_question_name, question_score: quest.new_question_score)
         end
     end
     @poll.total_score = total_score
@@ -51,15 +51,15 @@ class PollsController < ApplicationController
   def create
     @poll = Poll.new(poll_params)
       # binding.pry
-    respond_to do |format|
+    respond_to do |newcategoryat|
       if @poll.save
         calculate_rate
   #binding.pry
-        format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
-        format.json { render :show, status: :created, location: @poll }
+        newcategoryat.html { redirect_to @poll, notice: 'Poll was successfully created.' }
+        newcategoryat.json { render :show, status: :created, location: @poll }
       else
-        format.html { render :new }
-        format.json { render json: @poll.errors, status: :unprocessable_entity }
+        newcategoryat.html { render :new }
+        newcategoryat.json { render json: @poll.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,14 +67,14 @@ class PollsController < ApplicationController
   # PATCH/PUT /polls/1
   # PATCH/PUT /polls/1.json
   def update
-    respond_to do |format|
+    respond_to do |newcategoryat|
       if @poll.update(poll_params)
         calculate_rate
-        format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
-        format.json { render :show, status: :ok, location: @poll }
+        newcategoryat.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
+        newcategoryat.json { render :show, status: :ok, location: @poll }
       else
-        format.html { render :edit }
-        format.json { render json: @poll.errors, status: :unprocessable_entity }
+        newcategoryat.html { render :edit }
+        newcategoryat.json { render json: @poll.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -83,9 +83,9 @@ class PollsController < ApplicationController
   # DELETE /polls/1.json
   def destroy
     @poll.destroy
-    respond_to do |format|
-      format.html { redirect_to polls_url, notice: 'Poll was successfully destroyed.' }
-      format.json { head :no_content }
+    respond_to do |newcategoryat|
+      newcategoryat.html { redirect_to polls_url, notice: 'Poll was successfully destroyed.' }
+      newcategoryat.json { head :no_content }
     end
   end
 

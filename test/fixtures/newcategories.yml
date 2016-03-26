@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  new_category_name: MyString
+  new_category_score: 1
+
+two:
+  new_category_name: MyString
+  new_category_score: 1

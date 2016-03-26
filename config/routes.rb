@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  resources :formquestions
-  resources :forms do
-      resources :formquestions
+
+  resources :newcategories do
+    resources :newquestions
   end
+
   resources :categories
   resources :polls do
-    resources :questions 
+    resources :questions
   end
 
 

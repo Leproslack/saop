@@ -26,13 +26,13 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
 
-    respond_to do |format|
+    respond_to do |newcategoryat|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
+        newcategoryat.html { redirect_to @question, notice: 'Question was successfully created.' }
+        newcategoryat.json { render :show, status: :created, location: @question }
       else
-        format.html { render :new }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        newcategoryat.html { render :new }
+        newcategoryat.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -40,13 +40,13 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
-    respond_to do |format|
+    respond_to do |newcategoryat|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
+        newcategoryat.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        newcategoryat.json { render :show, status: :ok, location: @question }
       else
-        format.html { render :edit }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        newcategoryat.html { render :edit }
+        newcategoryat.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,9 +55,9 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1.json
   def destroy
     @question.destroy
-    respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
-      format.json { head :no_content }
+    respond_to do |newcategoryat|
+      newcategoryat.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+      newcategoryat.json { head :no_content }
     end
   end
 

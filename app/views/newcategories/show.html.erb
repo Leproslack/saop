@@ -1,0 +1,53 @@
+<div class="rows">
+      <p id="notice"><%= notice %></p>
+    <legend>
+      <p>Category name: <%= @newcategory.new_category_name %></p>
+      <p>Evaluating score: <%= @newcategory.new_category_score %></p>
+    </legend>
+  <div class="col-xs-9">
+    <table class="table table-bordered">
+      <thead>
+        <th>Question</th>
+        <th>Evaluating method</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+
+              <% @newcategory.newquestions.each do |question| %>
+        <tr>
+          <td><%= question.new_question_name %></td>
+          <td>0-<%= question.new_question_score %></td>
+          <td><%= link_to 'Destroy', [@newcategory, question], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+              <% end %>
+      </tbody>
+    </table>
+
+
+<div class="panel panel-default">
+  <div class="panel-body">
+  <%= form_for ([ @newcategory, @newcategory.newquestions.build ]), :html => {:class => "form-horizontal"} do |f| %>
+   <div class="form">
+      <%= f.label :new_question_name, "Question title", class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+      <%= f.text_area :new_question_name, class: "form-control" %></br>
+        </div>
+    </div>
+    <div class="form">
+      <%= f.label :new_question_score, "Question title", class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+      <%= f.select :new_question_score, (1..2), {include_blank: "Select rate"}, {class: 'form-control'} %>
+      </div>
+    </div>
+    <div class="form">
+      <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit "Save", class: "btn btn-default" %></p>
+    </div>
+  </div>
+  <% end %>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_newcategory_path(@newcategory) %> |
+<%= link_to 'Back', newcategories_path %>
+</div>

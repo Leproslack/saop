@@ -1,0 +1,6 @@
+<h1>Editing Newquestion</h1>
+
+<%= render 'form', newquestion: @newquestion %>
+
+<%= link_to 'Show', @newquestion %> |
+<%= link_to 'Back', newcategory_path(@newquestion.newcategory_id) %>

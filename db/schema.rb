@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324162656) do
+ActiveRecord::Schema.define(version: 20160326112100) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "category_name"
@@ -22,21 +22,19 @@ ActiveRecord::Schema.define(version: 20160324162656) do
     t.integer  "category_score", default: 0
   end
 
-  create_table "formquestions", force: :cascade do |t|
-    t.string   "question_name"
-    t.integer  "form_id"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.integer  "evaluate_method", limit: 2, default: 0
+  create_table "newcategories", force: :cascade do |t|
+    t.string   "new_category_name"
+    t.integer  "new_category_score", default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
-  add_index "formquestions", ["form_id"], name: "index_formquestions_on_form_id"
-
-  create_table "forms", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "score_category", default: 0
+  create_table "newquestions", force: :cascade do |t|
+    t.string   "new_question_name"
+    t.integer  "new_question_score", limit: 2, default: 0
+    t.integer  "newcategory_id"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "polls", force: :cascade do |t|
