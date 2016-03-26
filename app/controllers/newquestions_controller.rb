@@ -14,13 +14,11 @@ class NewquestionsController < ApplicationController
     @newcategory.update(new_category_score: evaluate_new)
   end
   # GET /newquestions
-  # GET /newquestions.json
   def index
     @newquestions = Newquestion.all
   end
 
   # GET /newquestions/1
-  # GET /newquestions/1.json
   def show
   end
 
@@ -30,7 +28,6 @@ class NewquestionsController < ApplicationController
   end
 
   # POST /newquestions
-  # POST /newquestions.json
   def create
     @newcategory = Newcategory.find(params[:newcategory_id])
     @newquestion = @newcategory.newquestions.create(newquestion_params)
@@ -38,16 +35,13 @@ class NewquestionsController < ApplicationController
       if @newquestion.save
         calculate_evaluating
         newcategoryat.html { redirect_to @newcategory, notice: 'Question was successfully created.' }
-        newcategoryat.json { render :show, status: :created, location: @newquestion }
       else
         newcategoryat.html { redirect_to @newcategory, notice: 'Submit Evaluate method.' }
-        newcategoryat.json { render json: @newquestion.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /newquestions/1
-  # DELETE /newquestions/1.json
   def destroy
     @newcategory = Newcategory.find(params[:newcategory_id])
     @newquestion = @newcategory.newquestions.find(params[:id])
@@ -55,7 +49,6 @@ class NewquestionsController < ApplicationController
       update_evaluate_after_destroy
       respond_to do |newcategoryat|
         newcategoryat.html { redirect_to newcategory_path(@newcategory), notice: 'Question was successfully destroyed.' }
-        newcategoryat.json { head :no_content }
       end
     end
   end

@@ -15,13 +15,11 @@ class PollsController < ApplicationController
   end
 
   # GET /polls
-  # GET /polls.json
   def index
     @polls = Poll.all
   end
 
   # GET /polls/1
-  # GET /polls/1.json
   def show
   end
 
@@ -46,8 +44,6 @@ class PollsController < ApplicationController
   end
 
   # POST /polls
-  # POST /polls.json
-
   def create
     @poll = Poll.new(poll_params)
       # binding.pry
@@ -56,36 +52,29 @@ class PollsController < ApplicationController
         calculate_rate
   #binding.pry
         newcategoryat.html { redirect_to @poll, notice: 'Poll was successfully created.' }
-        newcategoryat.json { render :show, status: :created, location: @poll }
       else
         newcategoryat.html { render :new }
-        newcategoryat.json { render json: @poll.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /polls/1
-  # PATCH/PUT /polls/1.json
   def update
     respond_to do |newcategoryat|
       if @poll.update(poll_params)
         calculate_rate
         newcategoryat.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
-        newcategoryat.json { render :show, status: :ok, location: @poll }
       else
         newcategoryat.html { render :edit }
-        newcategoryat.json { render json: @poll.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /polls/1
-  # DELETE /polls/1.json
   def destroy
     @poll.destroy
     respond_to do |newcategoryat|
       newcategoryat.html { redirect_to polls_url, notice: 'Poll was successfully destroyed.' }
-      newcategoryat.json { head :no_content }
     end
   end
 

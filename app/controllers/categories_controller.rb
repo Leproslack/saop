@@ -2,13 +2,11 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /categories
-  # GET /categories.json
   def index
     @categories = Category.all
   end
 
   # GET /categories/1
-  # GET /categories/1.json
   def show
   end
 
@@ -22,37 +20,30 @@ class CategoriesController < ApplicationController
   end
 
   # POST /categories
-  # POST /categories.json
   def create
     @category = Category.new(category_params)
 
     respond_to do |newcategoryat|
       if @category.save
         newcategoryat.html { redirect_to @category, notice: 'Category was successfully created.' }
-        newcategoryat.json { render :show, status: :created, location: @category }
       else
         newcategoryat.html { render :new }
-        newcategoryat.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /categories/1
-  # PATCH/PUT /categories/1.json
   def update
     respond_to do |newcategoryat|
       if @category.update(category_params)
         newcategoryat.html { redirect_to @category, notice: 'Category was successfully updated.' }
-        newcategoryat.json { render :show, status: :ok, location: @category }
       else
         newcategoryat.html { render :edit }
-        newcategoryat.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /categories/1
-  # DELETE /categories/1.json
   def destroy
     @category.destroy
     respond_to do |newcategoryat|
