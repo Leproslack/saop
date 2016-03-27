@@ -46,7 +46,7 @@ class QuestionsController < ApplicationController
 
   # DELETE /questions/1
   def destroy
-    @question.destroy
+    @question.destroy!
     respond_to do |newcategoryat|
       newcategoryat.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
     end

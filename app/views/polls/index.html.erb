@@ -1,28 +1,26 @@
 <div class="col-xs-12">
 <p id="notice"><%= notice %></p>
 <h1>Polls</h1>
+<%if @polls.exists?%>
 <table class="table table-striped">
   <thead>
     <tr>
       <th >Poll name</th>
       <th>Pole rate</th>
-            <%if @polls.exists?%>
-            <% @polls.last.categories.each do |category|  %>
-      <th><%= category.category_name %></th>
-            <% end %>
-            <% end %>
-      <th>Action</th>
+      <th>Category rate</td>
     </tr>
   </thead>
   <tbody>
     <% @polls.each do |poll| %>
       <tr>
         <td><%= poll.name %></td>
-        <td><strong><%= ( poll.poll_rate.to_f / poll.total_score.to_f * 100 ).round %>%</strong></td>
+        <td><strong><%= rate_to_percent(poll.poll_rate, poll.total_score) %>%</strong></td>
+        <td>
           <% poll.categories.each do |cat| %>
-          <td><strong><%= (cat.category_rate.to_f / cat.category_score.to_f * 100).round %>%</strong></td>
-
+          <%= cat.category_name %>
+            <strong><%= rate_to_percent(cat.category_rate, cat.category_score) %>%</strong> |
           <% end %>
+        </td>
         <td><%= link_to 'Show', poll %> |
         <%= link_to 'Edit', edit_poll_path(poll) %> |
         <%= link_to 'Destroy', poll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -31,4 +29,5 @@
   </tbody>
 </table>
 <%= link_to 'New Poll', new_poll_path %>
+<% end %>
 </div>

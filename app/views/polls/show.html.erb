@@ -4,7 +4,7 @@
   <h2>Shop POS and Business quality checklist</h2>
   <p>Doc Id: <small><%= @poll.id %></small></p>
   <p>Date: <small><%= @poll.created_at.strftime("%d.%m.%Y. %H:%M:%S") %></small></p>
-  <p>Poll rate: <small><%= ((@poll.poll_rate.to_f) / (@poll.total_score.to_f) *100).round %>%</small></p>
+  <p>Poll rate: <small><%= rate_to_percent(@poll.poll_rate, @poll.total_score) %>%</small></p>
 </legend>
 <div class="col-xs-9">
 <table class="table table-bordered">
