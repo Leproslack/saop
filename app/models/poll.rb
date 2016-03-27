@@ -13,7 +13,7 @@ class Poll < ApplicationRecord
       poll.categories.where(category_name: cat.category_name).update(category_rate: rate)
       poll_rate += rate
     end
-    poll.update(poll_rate: poll_rate)
+    poll.update!(poll_rate: poll_rate)
   end
 
   def self.get_attributes_from_template(poll)

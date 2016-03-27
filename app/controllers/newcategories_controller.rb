@@ -44,7 +44,7 @@ class NewcategoriesController < ApplicationController
 
   # DELETE /newcategories/1
   def destroy
-    @newcategory.destroy
+    @newcategory.destroy!
     respond_to do |newcategoryat|
       newcategoryat.html { redirect_to newcategories_url, notice: 'Newcategory was successfully destroyed.' }
     end

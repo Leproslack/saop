@@ -18,7 +18,7 @@ class NewquestionsController < ApplicationController
   # POST /newquestions
   def create
     @newcategory = Newcategory.find(params[:newcategory_id])
-    @newquestion = @newcategory.newquestions.create(newquestion_params)
+    @newquestion = @newcategory.newquestions.create!(newquestion_params)
     respond_to do |format|
       if @newquestion.save
         Newquestion.calculate_total_score_of_category(@newcategory)

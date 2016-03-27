@@ -1,5 +1,4 @@
-<div class=rows>
-
+<div class="col-xs-12">
 <p id="notice"><%= notice %></p>
 <legend>
   <h2>Shop POS and Business quality checklist</h2>
@@ -32,13 +31,10 @@
     <td><%= question.question_rate %></td>
     <td><%= question.question_comment %></td>
   </tr>
-
       <% end %>
     <% end %>
   </tbody>
 </table>
-
-
 <%= link_to 'Edit', edit_poll_path(@poll) %> |
 <%= link_to 'Back', polls_path %>
 </div>
