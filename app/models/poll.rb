@@ -18,7 +18,7 @@ class Poll < ApplicationRecord
 
   def self.get_attributes_from_template(poll)
     poll.total_score = Newcategory.sum(:new_category_score)
-    poll.name = "Poll#{Time.now.strftime("%Y%d%m%H%M%S")}"
+    poll.name = "P#{Time.now.strftime("%d%m%H%M%S")}"
     Newcategory.all.each do |cat|
       category = poll.categories.new(category_name: cat.new_category_name, category_score: cat.new_category_score )
         cat.newquestions.each do |quest|
