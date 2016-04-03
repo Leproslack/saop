@@ -36,7 +36,10 @@ group :development, :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'rspec-rails', '~> 3.0'
-
+  gem 'factory_girl'
+  gem 'guard-rspec'
+  gem 'spring-commands-rspec'
+  gem 'vcr'
 end
 
 group :development do
