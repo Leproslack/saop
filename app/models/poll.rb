@@ -7,12 +7,11 @@ class Poll < ApplicationRecord
 
 
   def self.calculate_rate(poll)
-    poll_rate = 0
     poll.categories.each do |cat|
       rate = cat.questions.sum(:question_rate)
-      poll.categories.where(category_name: cat.category_name).update(category_rate: rate)
-      poll_rate += rate
+      cat.update(category_rate: rate)
     end
+    poll_rate = poll.categories.sum(:category_rate)
     poll.update!(poll_rate: poll_rate)
   end
 
