@@ -19,10 +19,7 @@
           <%= f.fields_for :template_fields do |builder| %>
           <%= render "form_template_fields", :f => builder %>
           <% end %>
-
-    <div class="form-group">
-      <%= f.submit "Save", class: "btn btn-info" %>
-      <%= f.link_to_add "Add a task", :template_fields %>
-    </div>
+          <%= f.link_to_add "Add a task", :template_fields %>
+          <%= f.submit "Save", class: "btn btn-info" %>
 <% end %>
 </div>

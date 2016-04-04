@@ -3,6 +3,7 @@
   <legend>
     <h2>Category details</h2>
         <p>Name: <small><%=@template.category %></small></p>
+        <p>Name: <small><%=@template.score %></small></p>
   </legend>
   <div class="col-xs-9">
     <table class="table table-bordered">
@@ -15,8 +16,8 @@
       <tbody>
           <% @template.template_fields.each do |i| %>
         <tr>
-          <td><b><%= i.question %></b></td>
-          <td><b><%= i.score %></b></td>
+          <td><%= i.question %></td>
+          <td><%= i.score %></td>
         </tr>
         <% end %>
       </tbody>
