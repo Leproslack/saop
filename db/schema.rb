@@ -22,21 +22,6 @@ ActiveRecord::Schema.define(version: 20160403132848) do
     t.integer  "category_score", default: 0
   end
 
-  create_table "newcategories", force: :cascade do |t|
-    t.string   "new_category_name"
-    t.integer  "new_category_score", default: 0
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-  end
-
-  create_table "newquestions", force: :cascade do |t|
-    t.string   "new_question_name"
-    t.integer  "new_question_score", limit: 2, default: 0
-    t.integer  "newcategory_id"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-  end
-
   create_table "polls", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",              null: false
