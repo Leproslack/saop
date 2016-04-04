@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326112100) do
+ActiveRecord::Schema.define(version: 20160403132848) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "category_name"
@@ -53,6 +53,21 @@ ActiveRecord::Schema.define(version: 20160326112100) do
     t.integer  "question_rate"
     t.text     "question_comment"
     t.integer  "question_score",   default: 0
+  end
+
+  create_table "template_fields", force: :cascade do |t|
+    t.string   "question"
+    t.integer  "score"
+    t.integer  "template_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string   "category"
+    t.integer  "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

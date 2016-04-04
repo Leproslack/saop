@@ -3,7 +3,12 @@ class Template < ApplicationRecord
   accepts_nested_attributes_for :template_fields,:reject_if => lambda { |a| a[:question].blank? && a[:score].blank? }, :allow_destroy => true
 
   def self.calculate_total_score(template)
-    new_category_score = newcategory.newquestions.sum(:new_question_score)
-    newcategory.update!(new_category_score: new_category_score)
+    total_score = template.template_fields.sum(:score)
+    template.update!(score: total_score)
+  end
+
+  def self.update_score_after_destroy(template, template_fields)
+    updated_score = template.score - template_fields.score
+    template.update!(score: updated_score)
   end
 end

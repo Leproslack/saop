@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :template_fields
+  resources :templates
   resources :newcategories do
     resources :newquestions
   end
