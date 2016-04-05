@@ -14,7 +14,7 @@
   <tbody>
     <% @categories.each do |category| %>
       <tr>
-        <td><%= category.category_name %></td>
+        <td><%= category.name %></td>
         <td><%= category.poll_id %></td>
         <td><%= link_to 'Show', category %></td>
         <td><%= link_to 'Edit', edit_category_path(category) %></td>

@@ -14,11 +14,11 @@
         <% @polls.each do |poll| %>
           <tr>
             <td><%= poll.name %></td>
-            <td><strong><%= rate_to_percent(poll.poll_rate, poll.total_score) %>%</strong></td>
+            <td><strong><%= rate_to_percent(poll.score_result, poll.score_init) %>%</strong></td>
             <td>
               <% poll.categories.each do |cat| %>
-              <%= cat.category_name %>
-                <strong><%= rate_to_percent(cat.category_rate, cat.category_score) %>%</strong> |
+              <%= cat.name %>
+                <strong><%= rate_to_percent(cat.score_result, cat.score_init) %>%</strong> |
               <% end %>
             </td>
             <td><%= link_to 'Show', poll %> |

@@ -12,7 +12,7 @@
   <% end %>
       <p><%= poll.name %></p>
       <%= f.hidden_field :name %>
-      <%= f.hidden_field :total_score %>
+      <%= f.hidden_field :score_init %>
         <%= f.fields_for :categories do |builder| %>
             <%= render "categories_fields", :f => builder %>
         <% end %>

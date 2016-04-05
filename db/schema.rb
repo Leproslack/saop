@@ -11,33 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403132848) do
+ActiveRecord::Schema.define(version: 20160405110320) do
 
   create_table "categories", force: :cascade do |t|
-    t.string   "category_name"
+    t.string   "name"
     t.integer  "poll_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "category_rate"
-    t.integer  "category_score", default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "score_result"
+    t.integer  "score_init",   default: 0
   end
 
   create_table "polls", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "poll_rate"
-    t.integer  "total_score", default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "score_result"
+    t.integer  "score_init",   default: 0
   end
 
   create_table "questions", force: :cascade do |t|
     t.string   "content"
     t.integer  "category_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "question_rate"
-    t.text     "question_comment"
-    t.integer  "question_score",   default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "score_result"
+    t.text     "comment"
+    t.integer  "score_init",   default: 0
   end
 
   create_table "template_fields", force: :cascade do |t|

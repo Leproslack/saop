@@ -64,9 +64,9 @@ class PollsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
-      params.require(:poll).permit(:name, :total_score,
-          categories_attributes: [ :category_name, :category_score, :id,
-                    questions_attributes: [:content, :id, :question_rate, :question_comment, :question_score]])
+      params.require(:poll).permit(:name, :score_init,
+          categories_attributes: [ :name, :score_init, :id,
+                    questions_attributes: [:content, :id, :score_result, :comment, :score_init]])
     end
 
 end

@@ -28,7 +28,7 @@ class TemplateFieldsController < ApplicationController
 
     respond_to do |format|
       if @template_field.save
-        Template.calculate_total_score(@template)
+        Template.calculate_score_init(@template)
         format.html { redirect_to @template_field, notice: 'Template field was successfully created.' }
         format.json { render :show, status: :created, location: @template_field }
       else
@@ -43,7 +43,7 @@ class TemplateFieldsController < ApplicationController
   def update
     respond_to do |format|
       if @template_field.update(template_field_params)
-        Template.calculate_total_score(@template)
+        Template.calculate_score_init(@template)
         format.html { redirect_to @template_field, notice: 'Template field was successfully updated.' }
         format.json { render :show, status: :ok, location: @template_field }
       else
