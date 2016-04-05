@@ -33,13 +33,13 @@ gem "nested_form"
 
 
 group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 end
 
 group :development do
-  gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails'
   gem 'pry-byebug'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 3.0'
