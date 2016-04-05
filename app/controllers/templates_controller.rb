@@ -19,7 +19,6 @@ class TemplatesController < ApplicationController
 
   # GET /templates/1/edit
   def edit
-    @template.template_fields.build
   end
 
   # POST /templates

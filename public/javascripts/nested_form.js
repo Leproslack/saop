@@ -55,21 +55,21 @@
     insertFields: function(content, assoc, link) {
       var target = $(link).data('target');
       if (target) {
-        return $(content).appendTo($(target));
+        return $(content).fadeIn( "slow" ).appendTo($(target));
       } else {
-        return $(content).insertBefore(link);
+        return $(content).fadeIn( "slow" ).insertAfter(link);
       }
     },
     removeFields: function(e) {
       var $link = $(e.currentTarget),
           assoc = $link.data('association'); // Name of child to be removed
-      
+
       var hiddenField = $link.prev('input[type=hidden]');
       hiddenField.val('1');
-      
+
       var field = $link.closest('.fields');
       field.hide();
-      
+
       field
         .trigger({ type: 'nested:fieldRemoved', field: field })
         .trigger({ type: 'nested:fieldRemoved:' + assoc, field: field });

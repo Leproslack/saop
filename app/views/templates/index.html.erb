@@ -1,8 +1,10 @@
-<p id="notice"><%= notice %></p>
+<div class="rows">
+<div class="col-xs-10">
+  <p id="notice"><%= notice %></p>
 
 <h1>Templates</h1>
 
-<table>
+<table  class="table table-bordered">
   <thead>
     <tr>
       <th>Category</th>
@@ -16,9 +18,9 @@
       <tr>
         <td><%= template.category %></td>
         <td><%= template.score %></td>
-        <td><%= link_to 'Show', template %></td>
-        <td><%= link_to 'Edit', edit_template_path(template) %></td>
-        <td><%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', template %> |
+            <%= link_to 'Edit', edit_template_path(template) %> |
+            <%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -27,3 +29,5 @@
 <br>
 
 <%= link_to 'New Template', new_template_path %>
+</div>
+</div>
