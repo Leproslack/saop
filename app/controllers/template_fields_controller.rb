@@ -2,13 +2,11 @@ class TemplateFieldsController < ApplicationController
   before_action :set_template_field, only: [:show, :edit, :update, :destroy]
 
   # GET /template_fields
-  # GET /template_fields.json
   def index
     @template_fields = TemplateField.all
   end
 
   # GET /template_fields/1
-  # GET /template_fields/1.json
   def show
   end
 
@@ -22,42 +20,34 @@ class TemplateFieldsController < ApplicationController
   end
 
   # POST /template_fields
-  # POST /template_fields.json
   def create
     @template_field = TemplateField.new(template_field_params)
 
     respond_to do |format|
       if @template_field.save
         format.html { redirect_to @template_field, notice: 'Template field was successfully created.' }
-        format.json { render :show, status: :created, location: @template_field }
       else
         format.html { render :new }
-        format.json { render json: @template_field.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /template_fields/1
-  # PATCH/PUT /template_fields/1.json
   def update
     respond_to do |format|
       if @template_field.update(template_field_params)
         format.html { redirect_to @template_field, notice: 'Template field was successfully updated.' }
-        format.json { render :show, status: :ok, location: @template_field }
       else
         format.html { render :edit }
-        format.json { render json: @template_field.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /template_fields/1
-  # DELETE /template_fields/1.json
   def destroy
     @template_field.destroy
     respond_to do |format|
       format.html { redirect_to template_fields_url, notice: 'Template field was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
