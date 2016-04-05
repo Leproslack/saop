@@ -27,7 +27,6 @@ class TemplatesController < ApplicationController
     @template = Template.new(template_params)
     respond_to do |format|
       if @template.save
-        Template.calculate_score_init(@template)
         format.html { redirect_to @template, notice: 'Template was successfully created.' }
         format.json { render :show, status: :created, location: @template }
       else
@@ -43,7 +42,6 @@ class TemplatesController < ApplicationController
     respond_to do |format|
       binding.pry
       if @template.update(template_params)
-        Template.calculate_score_init(@template)
         format.html { redirect_to @template, notice: 'Template was successfully updated.' }
         format.json { render :show, status: :ok, location: @template }
       else
