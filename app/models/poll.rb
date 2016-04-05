@@ -6,15 +6,15 @@ class Poll < ApplicationRecord
 
 
 
-  def self.calculate_rate(poll)
-    poll.categories.each do |cat|
-      rate = cat.questions.sum(:score_result)
-      cat.update(score_result: rate)
-    end
-    score_result = poll.categories.sum(:score_result)
-    poll.update!(score_result: score_result)
-  end
-
+  # def self.calculate_rate(poll)
+  #   poll.categories.each do |cat|
+  #     rate = cat.questions.sum(:score_result)
+  #     cat.update(score_result: rate)
+  #   end
+  #   score_result = poll.categories.sum(:score_result)
+  #   poll.update!(score_result: score_result)
+  # end
+  #
   def self.get_attributes_from_template(poll)
     poll.score_init = Template.sum(:score)
     poll.name = "P#{Time.now.strftime("%d%m%H%M%S")}"
@@ -24,7 +24,7 @@ class Poll < ApplicationRecord
           cat.template_fields.each do |quest|
             question = category.questions.new(content: quest.question, score_init: quest.score)
           end
-      end    
+      end
     end
   end
 

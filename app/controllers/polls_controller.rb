@@ -28,7 +28,7 @@ class PollsController < ApplicationController
        binding.pry
     respond_to do |format|
       if @poll.save
-        Poll.calculate_rate(@poll)
+        #Poll.calculate_rate(@poll)
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
       else
         format.html { render :new }
@@ -40,7 +40,7 @@ class PollsController < ApplicationController
   def update
     respond_to do |format|
       if @poll.update(poll_params)
-        Poll.calculate_rate(@poll)
+        #Poll.calculate_rate(@poll)
         format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
       else
         format.html { render :edit }
