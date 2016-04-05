@@ -68,7 +68,7 @@
       hiddenField.val('1');
 
       var field = $link.closest('.fields');
-      field.hide();
+      field.fadeOut( "slow" );
 
       field
         .trigger({ type: 'nested:fieldRemoved', field: field })
