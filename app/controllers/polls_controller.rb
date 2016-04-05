@@ -25,7 +25,7 @@ class PollsController < ApplicationController
   # POST /polls
   def create
     @poll = Poll.new(poll_params)
-      # binding.pry
+       binding.pry
     respond_to do |format|
       if @poll.save
         Poll.calculate_rate(@poll)

@@ -16,13 +16,15 @@ class Poll < ApplicationRecord
   end
 
   def self.get_attributes_from_template(poll)
-    poll.total_score = Newcategory.sum(:new_category_score)
+    poll.total_score = Template.sum(:score)
     poll.name = "P#{Time.now.strftime("%d%m%H%M%S")}"
-    Newcategory.all.each do |cat|
-      category = poll.categories.new(category_name: cat.new_category_name, category_score: cat.new_category_score )
-        cat.newquestions.each do |quest|
-          question = category.questions.new(content: quest.new_question_name, question_score: quest.new_question_score)
-        end
+    Template.all.each do |cat|
+      if cat.score != 0
+        category = poll.categories.new(category_name: cat.category, category_score: cat.score )
+          cat.template_fields.each do |quest|
+            question = category.questions.new(content: quest.question, question_score: quest.score)
+          end
+      end    
     end
   end
 

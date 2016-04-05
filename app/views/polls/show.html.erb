@@ -22,7 +22,7 @@
           <td><b><%= cat.category_name %></b></td>
           <td><b>Score: <%= cat.category_score %></b></td>
           <td><b>Rate: <%= cat.category_rate %></b></td>
-          <td><b><%= (cat.category_rate.to_f / cat.category_score.to_f * 100).round %>%</b></td>
+          <td><b><%= rate_to_percent(cat.category_rate, cat.category_score) %>%</b></td>
         </tr>
             <% cat.questions.each do |question| %>
         <tr>
