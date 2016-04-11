@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :encryptable, :authentication_keys => [:login]
 
-  after_initialize :create_login, :if => :new_record?
+  #after_initialize :create_login, :if => :new_record?
 
   def create_login
     if self.username.blank?

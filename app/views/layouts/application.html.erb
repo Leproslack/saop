@@ -29,7 +29,7 @@
             </li>
         <% else %>
             <li>
-              <%= link_to(edit_user_registration_path) do %>
+              <%= link_to(user_session_path) do %> <!--не знаю, по какой причине тут было edit_user_registration_path-->
                   <span class="glyphicon glyphicon-log-in"></span> Sign In
               <% end %>
             </li>
