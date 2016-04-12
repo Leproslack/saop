@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :template_field do
-    question "MyString"
+    question "Question Test"
     score 1
-    template_id 1
   end
 end
