@@ -36,7 +36,6 @@ gem "nested_form"
 group :test do
   gem 'capybara'
   gem 'poltergeist'
-  gem 'pg'
 end
 
 group :development, :test do
@@ -45,6 +44,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-byebug'
   gem 'byebug'
+  gem 'pg'
 end
 
 group :development do
