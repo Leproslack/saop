@@ -3,5 +3,5 @@ dependencies:
       - bundle install --without development production
 
 test:
-  pre:
-    - bundle exec rake test_app
+  override:
+    - bin/rake spec
