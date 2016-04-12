@@ -32,11 +32,17 @@ gem 'jbuilder', '~> 2.0'
 gem "nested_form"
 
 
+group :test do
+  gem 'capybara'
+  gem 'poltergeist'
+end
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-byebug'
+  gem 'byebug'
 end
 
 group :development do
