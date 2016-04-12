@@ -3,10 +3,5 @@ dependencies:
       - bundle install --without development production
 
 test:
-  override:
-    - bin/rake spec
-
-database:
-  override:
-    - cp config/database.yml.ci config/database.yml
-    - bundle exec rake db:create db:schema:load --trace
+  pre:
+    - bundle exec rake test_app
