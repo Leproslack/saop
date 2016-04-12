@@ -4,4 +4,4 @@ dependencies:
 
 test:
   override:
-    - bin/rake spec
+    - bundle exec rspec
