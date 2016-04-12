@@ -2,6 +2,8 @@ class Poll < ApplicationRecord
   has_many :categories, :dependent => :destroy
   accepts_nested_attributes_for :categories
 
+  after_commit :calculate_score_result, on: [:create, :update]
+
   def self.get_attributes_from_template(poll)
     poll.score_init = Template.sum(:score)
     poll.name = "P#{Time.now.strftime("%d%m%H%M%S")}"
@@ -15,4 +17,8 @@ class Poll < ApplicationRecord
     end
   end
 
+  def calculate_score_result
+    categories.each {|q| q.update!(score_result: q.questions.sum(:score_result))}
+    update_attribute :score_result, categories.sum(:score_result)
+  end
 end
