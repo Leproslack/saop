@@ -36,7 +36,6 @@ gem "nested_form"
 group :test do
   gem 'capybara'
   gem 'poltergeist'
-  gem 'pg'
 end
 
 group :development, :test do
