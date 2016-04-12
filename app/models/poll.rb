@@ -1,6 +1,4 @@
 class Poll < ApplicationRecord
-  validates :name, presence: true
-  validates :score_init, presence: true, numericality: { only_integer: true }
   has_many :categories, :dependent => :destroy
   accepts_nested_attributes_for :categories
 
@@ -11,7 +9,7 @@ class Poll < ApplicationRecord
       if cat.score != 0
         category = poll.categories.new(name: cat.category, score_init: cat.score )
           cat.template_fields.each do |quest|
-            question = category.questions.new(content: quest.question, score_init: quest.score)
+            category.questions.new(content: quest.question, score_init: quest.score)
           end
       end
     end
