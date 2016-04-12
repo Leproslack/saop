@@ -1,4 +1,6 @@
 class TemplateField < ApplicationRecord
+  validates :question, presence: true
+  validates :score, presence: true, length: { in: 1..2 }
   belongs_to :template, optional: true
 
   after_commit    :calculate_score_init
@@ -9,5 +11,5 @@ class TemplateField < ApplicationRecord
       Template.find(template_id).update!(score: score_init)
     end
   end
-  
+
 end
