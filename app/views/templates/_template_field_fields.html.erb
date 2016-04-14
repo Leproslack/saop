@@ -1,5 +1,7 @@
 <p />
+<fieldset>
 <div class="row">
+
   <div class="form-group">
       <div class="col-xs-10 col-sm-5 col-md-3">
         <%= f.text_area :question, class: "form-control", placeholder: "Question here" %>
@@ -12,7 +14,9 @@
           <%= f.select(:score, (0..2), {include_blank: "Select rate"}, {class: 'form-control', id: "textarea"} )%>
       </div>
       <div class="col-xs-2 col-sm-1 col-md-1">
-          <%= f.link_to_remove "remove", class: "btn btn-danger" %>
+          <%= f.hidden_field :_destroy %>
+          <%= link_to "remove", '#', class: "remove_fields btn btn-alert" %>
       </div>
     </div>
 </div>
+</fieldset>
