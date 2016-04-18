@@ -118,6 +118,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.1)
+    database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     devise-encryptable (0.2.0)
       devise (>= 2.1.0)
@@ -262,6 +263,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.7.0)
   coffee-rails (~> 4.1.0)
+  database_cleaner (~> 1.5, >= 1.5.1)
   devise!
   devise-encryptable
   devise-scrypt (~> 1.0)

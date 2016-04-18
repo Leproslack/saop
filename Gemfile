@@ -33,18 +33,18 @@ gem 'jbuilder', '~> 2.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'factory_girl_rails'
+  end
+
+group :test do
   gem "rspec-core", :github => "rspec/rspec-core"
   gem "rspec-expectations", :github => "rspec/rspec-expectations"
   gem "rspec-mocks", :github => "rspec/rspec-mocks"
   gem "rspec-support", :github => "rspec/rspec-support"
   gem "rspec-rails", :github => "rspec/rspec-rails"
-  gem 'factory_girl_rails'
   gem 'capybara', '~> 2.7.0'
   gem 'poltergeist'
-  #gem 'selenium-webdriver', '~> 2.53'
-  end
-
-group :test do
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
   gem 'shoulda-matchers'
 end
 
