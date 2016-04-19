@@ -3,11 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-  $(document).on 'click', '.remove_fields', (event) ->
+  $(document).on 'click', '#remove_fields', (event) ->
     $(this).prev('input[type=hidden]').val '1'
     $(this).closest('fieldset').fadeOut 200
     event.preventDefault()
-  $(document).on 'click', '.add_fields', (event) ->
+  $(document).on 'click', '#add_fields', (event) ->
     regexp = undefined
     time = undefined
     time = (new Date).getTime()
