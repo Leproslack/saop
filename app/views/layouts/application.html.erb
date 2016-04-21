@@ -1,15 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Saop</title>
-    <%= csrf_meta_tags %>
-    <%= action_cable_meta_tag %>
+<head>
+  <title>Saop</title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+<div class="container">
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+            <li class="navbar-text">Hello, <%= current_user.email %></li>
+            <li><%= link_to(edit_user_registration_path) do %>
+                  <span class="glyphicon glyphicon-user"></span> Account
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, data: {confirm: 'Are you certain you want sign out?'}, :method => :delete, class: "signout" do %>
+                  <span class="glyphicon glyphicon-log-out"></span> Sign Out
+              <% end %>
+            </li>
+        <% else %>
+            <li>
+              <%= link_to(user_session_path) do %> <!--не знаю, по какой причине тут было edit_user_registration_path-->
+                  <span class="glyphicon glyphicon-log-in"></span> Sign In
+              <% end %>
+            </li>
+            <li>
+              <%= link_to(new_user_registration_path) do %>
+                  <span class="glyphicon glyphicon-ok-sign"></span> Registration
+              <% end %>
+            </li>
+            </ul>
+
+        <% end %>
+        </div>
+
+  </nav>
+  <%= render 'layouts/messages' %>
+  <%= yield %>
+</div>
+</body>
 </html>

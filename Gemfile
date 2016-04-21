@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
-
+ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+
 gem 'rails', '>= 5.0.0.beta3', '< 5.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma'
 # Use SCSS for stylesheets
@@ -33,6 +35,20 @@ gem 'jbuilder', '~> 2.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'factory_girl_rails'
+  end
+
+
+group :test do
+  gem "rspec-core", :github => "rspec/rspec-core"
+  gem "rspec-expectations", :github => "rspec/rspec-expectations"
+  gem "rspec-mocks", :github => "rspec/rspec-mocks"
+  gem "rspec-support", :github => "rspec/rspec-support"
+  gem "rspec-rails", :github => "rspec/rspec-rails"
+  gem 'capybara', '~> 2.7.0'
+  gem 'poltergeist'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -46,3 +62,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'devise', github: 'plataformatec/devise', branch: 'master'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'devise-encryptable'
+gem 'devise-scrypt', '~> 1.0'

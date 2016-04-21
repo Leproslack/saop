@@ -1,0 +1,266 @@
+From dcc4728b4fd3ada6cd27101480395bc40835eb04 Mon Sep 17 00:00:00 2001
+From: zelcam <zelcam@gmail.com>
+Date: Sat, 9 Apr 2016 13:24:33 +0700
+Subject: [PATCH] pre-test full user func
+
+---
+ Gemfile.rej                                    | 12 ++++++
+ app/models/user.rb                             | 35 +++++++++++++++++-
+ app/views/devise/registrations/edit.html.erb   | 13 +++++--
+ app/views/devise/registrations/new.html.erb    | 51 ++++++++++++++------------
+ app/views/devise/sessions/new.html.erb         |  4 +-
+ config/initializers/devise.rb                  | 10 ++---
+ db/migrate/20160331105044_add_manager_admin.rb |  6 +++
+ db/schema.rb                                   |  4 +-
+ 8 files changed, 99 insertions(+), 36 deletions(-)
+ create mode 100644 Gemfile.rej
+ create mode 100644 db/migrate/20160331105044_add_manager_admin.rb
+
+diff --git a/Gemfile.rej b/Gemfile.rej
+new file mode 100644
+index 0000000..fe5511b
+--- /dev/null
++++ b/Gemfile.rej
+@@ -0,0 +1,12 @@
++diff a/Gemfile b/Gemfile	(rejected hunks)
++@@ -36,6 +36,10 @@
++   gem 'capybara'
++   gem 'poltergeist'
++   gem 'rspec-rails', '~> 3.0'
+++  gem 'factory_girl'
+++  gem 'guard-rspec'
+++  gem 'spring-commands-rspec'
+++  gem 'vcr'
++ end
++ 
++ group :development do
+diff --git a/app/models/user.rb b/app/models/user.rb
+index a49310a..d2f9b09 100644
+--- a/app/models/user.rb
++++ b/app/models/user.rb
+@@ -2,7 +2,40 @@ class User < ApplicationRecord
+   # Include default devise modules. Others available are:
+   # :confirmable, :lockable, :timeoutable and :omniauthable
+   devise :database_authenticatable, :registerable,
+-         :recoverable, :rememberable, :trackable, :validatable, :encryptable
++         :recoverable, :rememberable, :trackable, :validatable, :encryptable, :authentication_keys => [:login]
++
++  after_initialize :create_login, :if => :new_record?
++
++  def create_login
++    if self.username.blank?
++      email = self.email.split(/@/)
++      login_taken = User.where(:username => email[0]).first
++      unless login_taken
++        self.username = email[0]
++      else
++        self.username = self.email
++      end
++    end
++  end
++
++  def login=(login)
++    @login = login
++  end
++
++  def login
++    @login || self.username || self.email
++  end
++
++  private
++
++  def self.find_for_database_authentication(warden_conditions)
++    conditions = warden_conditions.dup
++    if login = conditions.delete(:login)
++      where(conditions.to_h).where(["lower(username) = :value OR lower(email) = :value", {:value => login.downcase}]).first
++    else
++      where(conditions.to_h).first
++    end
++  end
+ 
+ 
+ end
+diff --git a/app/views/devise/registrations/edit.html.erb b/app/views/devise/registrations/edit.html.erb
+index 3ea40f0..ad854db 100644
+--- a/app/views/devise/registrations/edit.html.erb
++++ b/app/views/devise/registrations/edit.html.erb
+@@ -3,10 +3,15 @@
+ <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+   <%= devise_error_messages! %>
+ 
+-  <div class="field">
+-    <%= f.label :email %><br />
+-    <%= f.email_field :email, autofocus: true %>
+-  </div>
++    <div class="field">
++      <p><%= f.label :login %><br/>
++        <%= f.text_field :login %></p>
++    </div>
++
++    <div class="field">
++      <%= f.label :email %><br/>
++      <%= f.email_field :email, autofocus: true %>
++    </div>
+ 
+   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+diff --git a/app/views/devise/registrations/new.html.erb b/app/views/devise/registrations/new.html.erb
+index f898325..809a172 100644
+--- a/app/views/devise/registrations/new.html.erb
++++ b/app/views/devise/registrations/new.html.erb
+@@ -1,29 +1,34 @@
+ <h2>Sign up</h2>
+ 
+ <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+-  <%= devise_error_messages! %>
+-
+-  <div class="field">
+-    <%= f.label :email %><br />
+-    <%= f.email_field :email, autofocus: true %>
+-  </div>
+-
+-  <div class="field">
+-    <%= f.label :password %>
+-    <% if @minimum_password_length %>
+-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+-    <% end %><br />
+-    <%= f.password_field :password, autocomplete: "off" %>
+-  </div>
+-
+-  <div class="field">
+-    <%= f.label :password_confirmation %><br />
+-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+-  </div>
+-
+-  <div class="actions">
+-    <%= f.submit "Sign up" %>
+-  </div>
++    <%= devise_error_messages! %>
++
++    <div class="field">
++      <p><%= f.label :login %><br/>
++        <%= f.text_field :login %></p>
++    </div>
++
++    <div class="field">
++      <%= f.label :email %><br/>
++      <%= f.email_field :email, autofocus: true %>
++    </div>
++
++    <div class="field">
++      <%= f.label :password %>
++      <% if @minimum_password_length %>
++          <em>(<%= @minimum_password_length %> characters minimum)</em>
++      <% end %><br/>
++      <%= f.password_field :password, autocomplete: "off" %>
++    </div>
++
++    <div class="field">
++      <%= f.label :password_confirmation %><br/>
++      <%= f.password_field :password_confirmation, autocomplete: "off" %>
++    </div>
++
++    <div class="actions">
++      <%= f.submit "Sign up" %>
++    </div>
+ 
+ <% end %>
+ 
+diff --git a/app/views/devise/sessions/new.html.erb b/app/views/devise/sessions/new.html.erb
+index c7999dc..b5dc805 100644
+--- a/app/views/devise/sessions/new.html.erb
++++ b/app/views/devise/sessions/new.html.erb
+@@ -4,8 +4,8 @@
+ <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+     <%= devise_error_messages! %>
+   <div class="field">
+-    <%= f.label :email %><br />
+-    <%= f.email_field :email, autofocus: true %>
++    <%= f.label :login %><br />
++    <%= f.text_field :login, autofocus: true %>
+   </div>
+ 
+   <div class="field">
+diff --git a/config/initializers/devise.rb b/config/initializers/devise.rb
+index 00cdfec..17afc7c 100644
+--- a/config/initializers/devise.rb
++++ b/config/initializers/devise.rb
+@@ -34,7 +34,7 @@ Devise.setup do |config|
+   # session. If you need permissions, you should implement that in a before filter.
+   # You can also supply a hash where the value is a boolean determining whether
+   # or not authentication should be aborted when the value is not present.
+-  config.authentication_keys = [ :email, :username ]
++  config.authentication_keys = [ :email, :login ]
+ 
+   # Configure parameters from the request object used for authentication. Each entry
+   # given should be a request method and it will automatically be passed to the
+@@ -46,12 +46,12 @@ Devise.setup do |config|
+   # Configure which authentication keys should be case-insensitive.
+   # These keys will be downcased upon creating or modifying a user and when used
+   # to authenticate or find a user. Default is :email.
+-  config.case_insensitive_keys = [ :email, :username ]
++  config.case_insensitive_keys = [ :email, :login ]
+ 
+   # Configure which authentication keys should have whitespace stripped.
+   # These keys will have whitespace before and after removed upon creating or
+   # modifying a user and when used to authenticate or find a user. Default is :email.
+-  config.strip_whitespace_keys = [ :email, :username ]
++  config.strip_whitespace_keys = [ :email, :login ]
+ 
+   # Tell if authentication through request.params is enabled. True by default.
+   # It can be set to an array that will enable params authentication only for the
+@@ -99,7 +99,7 @@ Devise.setup do |config|
+   # a value less than 10 in other environments. Note that, for bcrypt (the default
+   # algorithm), the cost increases exponentially with the number of stretches (e.g.
+   # a value of 20 is already extremely slow: approx. 60 seconds for 1 calculation).
+-  config.stretches = Rails.env.test? ? 1 : 11
++  config.stretches = Rails.env.test? ? 1 : 10
+ 
+   # Set up a pepper to generate the hashed password.
+   #config.pepper = '095916d90c3f79ko49tp79mwlftiw127od14x62wfqee8ato0cm9fmd3n1279827tu681o8a1592v848d6eli6211d03r1xk0h8tug8mg4r02808lx8ugeswjga1fe8w'
+@@ -214,7 +214,7 @@ Devise.setup do |config|
+   # Turn scoped views on. Before rendering "sessions/new", it will first check for
+   # "users/sessions/new". It's turned off by default because it's slower if you
+   # are using only default views.
+-  # config.scoped_views = false
++  config.scoped_views = true
+ 
+   # Configure the default scope given to Warden. By default it's the first
+   # devise role declared in your routes (usually :user).
+diff --git a/db/migrate/20160331105044_add_manager_admin.rb b/db/migrate/20160331105044_add_manager_admin.rb
+new file mode 100644
+index 0000000..6e43020
+--- /dev/null
++++ b/db/migrate/20160331105044_add_manager_admin.rb
+@@ -0,0 +1,6 @@
++class AddManagerAdmin < ActiveRecord::Migration[5.0]
++  def change
++    add_column :users, :manager, :boolean
++    add_column :users, :admin, :boolean
++  end
++end
+diff --git a/db/schema.rb b/db/schema.rb
+index b0944a9..9063849 100644
+--- a/db/schema.rb
++++ b/db/schema.rb
+@@ -11,7 +11,7 @@
+ #
+ # It's strongly recommended that you check this file into your version control system.
+ 
+-ActiveRecord::Schema.define(version: 20160330033130) do
++ActiveRecord::Schema.define(version: 20160331105044) do
+ 
+   create_table "users", force: :cascade do |t|
+     t.string   "email",                  default: "", null: false
+@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20160330033130) do
+     t.datetime "updated_at",                          null: false
+     t.string   "username"
+     t.string   "password_salt"
++    t.boolean  "manager"
++    t.boolean  "admin"
+   end
+ 
+   add_index "users", ["email"], name: "index_users_on_email", unique: true
+-- 
+2.6.1.windows.1
+
