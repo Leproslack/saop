@@ -4,18 +4,18 @@
 
   <div class="form-group">
       <div class="col-xs-10 col-sm-5 col-md-3">
-        <%= f.text_area :question, class: "form-control", placeholder: "Question here" %>
+        <%= f.text_area :question, class: "form-control", placeholder: "Question here", id: "placeholder" %>
       </div>
     </div>
 </div>
 <div class="row">
     <div class="form-group">
       <div class="col-xs-6 col-sm-3 col-md-2">
-          <%= f.select(:score, (0..2), {include_blank: "Select rate"}, {class: 'form-control', id: "textarea"} )%>
+          <%= f.select(:score, (1..2), {include_blank: "Select rate"}, {class: 'form-control', id: "select"} )%>
       </div>
       <div class="col-xs-2 col-sm-1 col-md-1">
           <%= f.hidden_field :_destroy %>
-          <%= link_to "remove", '#', class: "remove_fields" %>
+          <%= link_to "remove", '#', id: "remove_fields" %>
       </div>
     </div>
 </div>

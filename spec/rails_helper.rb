@@ -5,7 +5,10 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
+Capybara.configure do |c|
+ c.javascript_driver = :poltergeist
+ c.default_driver = :poltergeist
+end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

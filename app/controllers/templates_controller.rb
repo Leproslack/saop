@@ -34,7 +34,6 @@ class TemplatesController < ApplicationController
   # PATCH/PUT /templates/1
   def update
     respond_to do |format|
-      binding.pry
       if @template.update(template_params)
         format.html { redirect_to @template, notice: 'Template was successfully updated.' }
       else
