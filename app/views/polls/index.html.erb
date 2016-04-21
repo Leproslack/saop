@@ -1,0 +1,34 @@
+<div class="col-xs-12">
+  <p id="notice"><%= notice %></p>
+  <h1>Polls</h1>
+    <%if @polls.exists?%>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th >Poll name</th>
+          <th>Pole rate</th>
+          <th>Category rate</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @polls.each do |poll| %>
+          <tr>
+            <td><%= poll.name %></td>
+            <td><strong><%= rate_to_percent(poll.score_result, poll.score_init) %>%</strong></td>
+            <td>
+              <% poll.categories.each do |cat| %>
+              <%= cat.name %>
+                <strong><%= rate_to_percent(cat.score_result, cat.score_init) %>%</strong> |
+              <% end %>
+            </td>
+            <td><%= link_to 'Show', poll %> |
+            <%= link_to 'Edit', edit_poll_path(poll) %> |
+            <%= link_to 'Destroy', poll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+    <% end %>
+    </tbody>
+  </table>
+    <% end %>
+
+      <%= link_to 'New Poll', new_poll_path %>
+</div>

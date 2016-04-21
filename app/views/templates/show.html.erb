@@ -1,0 +1,28 @@
+<div class="col-xs-12">
+  <p id="notice"><%= notice %></p>
+  <legend>
+    <h2>Category details</h2>
+        <p>Name: <small><%=@template.category %></small></p>
+        <p>Name: <small><%=@template.score %></small></p>
+  </legend>
+  <div class="col-xs-9">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @template.template_fields.each do |i| %>
+        <tr>
+          <td><%= i.question %></td>
+          <td><%= i.score %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'Edit', edit_template_path(@template) %> |
+    <%= link_to 'Back', templates_path %>
+  </div>
+</div>

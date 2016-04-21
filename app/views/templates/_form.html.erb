@@ -1,0 +1,26 @@
+<%= form_for(template, html: { class: "form-horizontal" }) do |f| %>
+  <% if template.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(template.errors.count, "error") %> prohibited this template from being saved:</h2>
+      <ul>
+      <% template.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-xs-4">
+      <%= f.label :category %>
+      <%= f.text_field :category, class: "form-control" %> <br />
+    </div>
+  </div>
+
+          <%= f.fields_for :template_fields do |builder| %>
+          <%= render "template_field_fields", f: builder %>
+          <% end %>
+          <%= link_to_add_fields "Add Question", f, :template_fields %><p />
+        <div class="form-group">
+          <%= f.submit "Save", class: "btn btn-info" %>
+        </div>
+<% end %>
