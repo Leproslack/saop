@@ -5,7 +5,8 @@ ruby '2.3.0'
 
 gem 'rails', '>= 5.0.0.beta3', '< 5.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma'
 # Use SCSS for stylesheets
@@ -36,6 +37,7 @@ group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails'
   end
+
 
 group :test do
   gem "rspec-core", :github => "rspec/rspec-core"
